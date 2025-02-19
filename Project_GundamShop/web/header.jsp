@@ -13,7 +13,7 @@
     }
 
     .header {
-        background-color: #2c3e50;
+        background-color: #3d7fe3;
         padding: 1rem 0;
         width: 100%;
         top: 0;
@@ -33,7 +33,7 @@
 
     .logo {
         color: #fff;
-        font-size: 1.5rem;
+        font-size: 2rem;
         font-weight: bold;
         text-decoration: none;
     }
@@ -47,7 +47,7 @@
     .menu-item a {
         color: #fff;
         text-decoration: none;
-        font-size: 1rem;
+        font-size: 24px;
         transition: color 0.3s ease;
     }
 
@@ -76,12 +76,26 @@
         cursor: pointer;
         color: #2c3e50;
     }
+
+    .header_logo {
+        display: flex;
+        justify-content: center;
+    }
+
+    .header_logo img{
+        display: flex;
+        align-items: center;
+        width: 220px       
+    }
+   
 </style>
 
+<div class="header_logo">
+    <img src="img/gundam.jpg" alt=""> 
+</div>
+
 <header class="header">
-    <%
-        int x = 100;
-    %>
+
     <div class="container">
         <nav class="nav">
             <a href="#" class="logo">Minh.Đạt Gunpla Shop</a>
@@ -95,6 +109,8 @@
                 <input type="text" class="search-input" placeholder="Tìm kiếm...">
                 <button class="search-button">🔍</button>
             </div>
+
+            
         </nav>
     </div>
 </header>
