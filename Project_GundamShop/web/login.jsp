@@ -21,7 +21,7 @@
                 <hr>
                 <div>Bạn chưa có tài khoản ?</div>
                 <a href="signup.jsp" class="sign_up">Đăng ký</a>
-                <button class="home-button" onclick="window.location.href='index.html'">Quay về trang chủ</button>
+                <a href="header.jsp" class="home-button">Quay về trang chủ</a>
             </form>
         </div>
     </body>
@@ -65,12 +65,25 @@
             text-decoration: none;
             margin: 20px;
         }
-        
+
         .home-button {
+            display: block;
+            width: 100%;
+            padding: 10px;
             background: #007bff;
+            color: white;
+            text-align: center;
+            text-decoration: none;
+            border-radius: 4px;
+            margin-top: 10px;
+            font-size: 16px;
+            box-sizing: border-box;
         }
+
+
         .home-button:hover {
             background: #0056b3;
         }
+
     </style>
 </html>

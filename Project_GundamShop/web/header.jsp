@@ -87,7 +87,50 @@
         align-items: center;
         width: 220px       
     }
-   
+
+    .user-menu {
+        position: relative;
+        display: inline-block;
+    }
+
+    .user-icon {
+        background: none;
+        border: none;
+        font-size: 20px;
+        cursor: pointer;
+    }
+
+    .dropdown-menu {
+        display: none;
+        position: absolute;
+        right: 0;
+        background: white;
+        box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.2);
+        border-radius: 5px;
+        width: 120px;
+        text-align: center;
+    }
+
+    .dropdown-menu a {
+        display: block;
+        padding: 10px;
+        text-decoration: none;
+        color: black;
+    }
+
+    .dropdown-menu a:hover {
+        background: #ddd;
+    }
+
+    /* Hiển thị dropdown khi hover */
+    .user-menu:hover .dropdown-menu {
+        display: block;
+    }
+
+    .user-icon img {
+        width: 30px;
+        height: 30px;
+    }
 </style>
 
 <div class="header_logo">
@@ -110,7 +153,15 @@
                 <button class="search-button">🔍</button>
             </div>
 
-            
+            <div class="user-menu">
+                <button class="user-icon">
+                    <img src="icon/user.png" alt="">
+                </button>
+                <div class="dropdown-menu">
+                    <a href="login.jsp">Đăng nhập</a>
+                    <a href="#">Đăng ký</a>
+                </div>
+            </div>
         </nav>
     </div>
 </header>
