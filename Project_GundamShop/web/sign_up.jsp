@@ -1,6 +1,6 @@
 <%-- 
-    Document   : login
-    Created on : Feb 13, 2025, 10:58:14 AM
+    Document   : signup
+    Created on : Feb 28, 2025, 11:30:00 AM
     Author     : tamph
 --%>
 
@@ -9,23 +9,22 @@
 <html>
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-        <title>JSP Page</title>
+        <title>Đăng ký</title>
     </head>   
     <body>
-        
-        <div class="login-container">
-            <h2>ĐĂNG NHẬP</h2>
-            <form id="login_form">
-                <input type="text" placeholder="Tên đăng nhập" required>
-                <input type="password" placeholder="Mật khẩu" required>
-                <button type="submit">Đăng nhập</button>
+        <div class="signup-container">
+            <h2>ĐĂNG KÝ</h2>
+            <form id="signup_form" autocomplete="off">
+                <input type="text" name="username" placeholder="Tên đăng ký" autocomplete="off" required>
+                <input type="email" name="email" placeholder="Email" autocomplete="off" required>
+                <input type="password" name="password" placeholder="Mật khẩu" autocomplete="new-password" required>
+                <button type="submit">Đăng ký</button>
                 <hr>
-                <div>Bạn chưa có tài khoản ?</div>
-                <a href="sign_up.jsp" class="sign_up">Đăng ký</a>
+                <div>Bạn đã có tài khoản ?</div>
+                <a href="login.jsp" class="login-link">Đăng nhập</a>
                 <a href="home.jsp" class="home-button">Quay về trang chủ</a>
             </form>
         </div>
-        
     </body>
 
     <style>
@@ -37,7 +36,7 @@
             height: 100vh;
             background-color: #3d7fe3;
         }
-        .login-container {
+        .signup-container {
             background: white;
             padding: 20px;
             border-radius: 8px;
@@ -62,12 +61,10 @@
         button:hover {
             background: #0358b3;
         }
-
-        .sign_up {
+        .login-link {
             text-decoration: none;
             margin: 20px;
         }
-
         .home-button {
             display: block;
             width: 100%;
@@ -81,11 +78,8 @@
             font-size: 16px;
             box-sizing: border-box;
         }
-
-
         .home-button:hover {
             background: #0056b3;
         }
-
     </style>
 </html>
