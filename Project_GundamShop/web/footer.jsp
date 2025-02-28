@@ -7,7 +7,7 @@
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <style>
     .footer {
-        background-color: #0044AA; 
+        background-color: #176cd3; 
         color: #fff;
         padding: 3rem 0;
         margin-top: 2rem;

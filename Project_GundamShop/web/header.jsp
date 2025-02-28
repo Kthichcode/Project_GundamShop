@@ -14,7 +14,7 @@
     }
 
     .header {
-        background-color: #0044AA;
+        background-color: #176cd3;
         padding: 1rem 0;
         width: 100%;
         top: 0;
