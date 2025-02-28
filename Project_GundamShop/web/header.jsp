@@ -10,13 +10,16 @@
         margin: 0;
         padding: 0;
         box-sizing: border-box;
+        font-family: Arial, sans-serif;
     }
 
     .header {
-        background-color: #3d7fe3;
+        background-color: #0044AA;
         padding: 1rem 0;
         width: 100%;
         top: 0;
+        position: sticky;
+        z-index: 1000;
     }
 
     .container {
@@ -41,18 +44,49 @@
     .menu {
         display: flex;
         list-style: none;
-        gap: 2rem;
+        gap: 1.5rem;
     }
 
     .menu-item a {
         color: #fff;
         text-decoration: none;
-        font-size: 24px;
+        font-size: 18px;
         transition: color 0.3s ease;
     }
 
     .menu-item a:hover {
-        color: #3498db;
+        color: #f1c40f;
+    }
+
+    .dropdown {
+        position: relative;
+        display: inline-block;
+    }
+
+    .dropdown-content {
+        display: none;
+        position: absolute;
+        background: white;
+        box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.2);
+        border-radius: 5px;
+        width: 150px;
+        text-align: left;
+        padding: 10px 0;
+    }
+
+    .dropdown:hover .dropdown-content {
+        display: block;
+    }
+
+    .dropdown-content a {
+        display: block;
+        padding: 10px;
+        text-decoration: none;
+        color: black;
+    }
+
+    .dropdown-content a:hover {
+        background: #ddd;
     }
 
     .search-bar {
@@ -67,7 +101,7 @@
         border: none;
         outline: none;
         padding: 0.2rem;
-        width: 200px;
+        width: 180px;
     }
 
     .search-button {
@@ -80,23 +114,21 @@
     .header_logo {
         display: flex;
         justify-content: center;
+        padding: 0.5rem 0;
     }
 
-    .header_logo img{
-        display: flex;
-        align-items: center;
-        width: 220px       
+    .header_logo img {
+        width: 180px;
+        height: auto;
     }
 
     .user-menu {
         position: relative;
-        display: inline-block;
     }
 
     .user-icon {
         background: none;
         border: none;
-        font-size: 20px;
         cursor: pointer;
     }
 
@@ -107,7 +139,7 @@
         background: white;
         box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.2);
         border-radius: 5px;
-        width: 120px;
+        width: 130px;
         text-align: center;
     }
 
@@ -122,7 +154,6 @@
         background: #ddd;
     }
 
-    /* Hiển thị dropdown khi hover */
     .user-menu:hover .dropdown-menu {
         display: block;
     }
@@ -131,35 +162,61 @@
         width: 30px;
         height: 30px;
     }
+
+    @media (max-width: 768px) {
+        .nav {
+            flex-direction: column;
+        }
+        .menu {
+            flex-direction: column;
+            align-items: center;
+            padding: 1rem 0;
+        }
+        .search-bar {
+            width: 100%;
+            justify-content: center;
+        }
+    }
 </style>
 
 <div class="header_logo">
-    <img src="img/gundam.jpg" alt=""> 
+    <img src="img/gundam.jpg" alt="Gundam Logo"> 
 </div>
 
 <header class="header">
-
     <div class="container">
         <nav class="nav">
             <a href="#" class="logo">Minh.Đạt Gunpla Shop</a>
             <ul class="menu">
                 <li class="menu-item"><a href="#">Trang chủ</a></li>
-                <li class="menu-item"><a href="#">Sản phẩm</a></li>
+                <li class="menu-item dropdown">
+                    <a href="#">Sản phẩm</a>
+                    <div class="dropdown-content">
+                        <a href="#">SD (Super Deformed)</a>
+                        <a href="#">HG (High Grade)</a>
+                        <a href="#">MG (Master Grade)</a>
+                        <a href="#">PG (Perfect Grade)</a>
+                        <a href="#">RG (Real Grade)</a>
+                       
+                    </div>
+                </li>
                 <li class="menu-item"><a href="#">Giỏ hàng</a></li>
                 <li class="menu-item"><a href="#">Liên hệ</a></li>
+                
             </ul>
             <div class="search-bar">
                 <input type="text" class="search-input" placeholder="Tìm kiếm...">
                 <button class="search-button">🔍</button>
             </div>
-
             <div class="user-menu">
                 <button class="user-icon">
-                    <img src="icon/user.png" alt="">
+                    <img src="icon/user.png" alt="User Icon">
                 </button>
                 <div class="dropdown-menu">
                     <a href="login.jsp">Đăng nhập</a>
                     <a href="#">Đăng ký</a>
+                    <a href="#">Tài khoản</a>
+                    <a href="#">Đăng xuất</a>
                 </div>
             </div>
         </nav>
