@@ -5,8 +5,8 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="2dc68175-2f99-4468-8472-5d814dc041ee" name="Changes" comment="ahihi">
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Project_GundamShop/web/footer.jsp" beforeDir="false" afterPath="$PROJECT_DIR$/Project_GundamShop/web/footer.jsp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_rebase_[Changes]/shelved.patch" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_rebase_[Changes]1/shelved.patch" beforeDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -105,6 +105,7 @@
       <workItem from="1739979459180" duration="144000" />
       <workItem from="1740010429293" duration="23000" />
       <workItem from="1740363843304" duration="9000" />
+      <workItem from="1740727710159" duration="188000" />
     </task>
     <task id="LOCAL-00001" summary="Minhdeptrai">
       <option name="closed" value="true" />

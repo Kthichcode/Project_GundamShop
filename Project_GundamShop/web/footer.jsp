@@ -7,49 +7,53 @@
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <style>
     .footer {
-        background-color: #3498db;
+        background-color: #0044AA; 
         color: #fff;
         padding: 3rem 0;
         margin-top: 2rem;
+        font-family: Arial, sans-serif;
     }
 
     .footer-container {
         max-width: 1200px;
         margin: 0 auto;
-        padding: 0 1rem;
+        padding: 0 1.5rem;
         display: grid;
-        grid-template-columns: repeat(4, 1fr);
+        grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
         gap: 2rem;
     }
 
     .footer-section h3 {
-        font-size: 1.2rem;
+        font-size: 1.4rem;
         margin-bottom: 1rem;
-        color: #3498db;
+        color: #00AEEF; 
+        text-transform: uppercase;
     }
 
-    .footer-section p {
-        margin-bottom: 0.5rem;
-        font-size: 0.9rem;
-        line-height: 1.5;
+    .footer-section p, .footer-links li {
+        font-size: 1rem;
+        line-height: 1.6;
     }
 
     .footer-links {
         list-style: none;
+        padding: 0;
     }
 
     .footer-links li {
-        margin-bottom: 0.5rem;
+        margin-bottom: 0.6rem;
     }
 
     .footer-links a {
         color: #fff;
         text-decoration: none;
-        transition: color 0.3s ease;
+        transition: all 0.3s ease-in-out;
+        font-weight: 500;
     }
 
     .footer-links a:hover {
-        color: #3498db;
+        color: #00AEEF;
+        text-decoration: underline;
     }
 
     .social-links {
@@ -59,56 +63,110 @@
     }
 
     .social-links a {
-        color: #fff;
-        text-decoration: none;
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        width: 40px;
+        height: 40px;
+        background: #00AEEF;
+        color: #0044AA;
+        border-radius: 50%;
         font-size: 1.5rem;
+        transition: transform 0.3s ease;
+    }
+
+    .social-links a:hover {
+        transform: scale(1.1);
+        background: #fff;
+        color: #0044AA;
+    }
+
+    .newsletter {
+        margin-top: 1rem;
+    }
+
+    .newsletter input {
+        width: 80%;
+        padding: 0.8rem;
+        border: none;
+        border-radius: 5px;
+        margin-right: 0.5rem;
+        font-size: 1rem;
+    }
+
+    .newsletter button {
+        padding: 0.8rem 1.2rem;
+        border: none;
+        background: #00AEEF;
+        color: #0044AA;
+        font-weight: bold;
+        border-radius: 5px;
+        cursor: pointer;
+        transition: 0.3s;
+    }
+
+    .newsletter button:hover {
+        background: #fff;
+        color: #0044AA;
     }
 
     .copyright {
         text-align: center;
         padding-top: 2rem;
         margin-top: 2rem;
-        border-top: 1px solid #34495e;
-        font-size: 0.9rem;
+        border-top: 1px solid #00AEEF;
+        font-size: 1rem;
+        color: #ddd;
     }
 </style>
 
 <footer class="footer">
     <div class="footer-container">
+        <!-- Giới thiệu -->
         <div class="footer-section">
             <h3>Về chúng tôi</h3>
-            <p>Minh.Đạt Gunpla Shop là điểm đến tin cậy cho những sản phẩm chất lượng với giá cả hợp lý. Chúng tôi cam kết mang đến trải nghiệm mua sắm tốt nhất cho khách hàng.</p>
+            <p>Minh.Đạt Gunpla Shop chuyên cung cấp mô hình Gunpla chính hãng với giá tốt nhất. Chúng tôi cam kết mang đến sản phẩm chất lượng và dịch vụ tận tâm.</p>
         </div>
         
+       
         <div class="footer-section">
-            <h3>Liên kết nhanh</h3>
+            <h3>Danh mục sản phẩm</h3>
             <ul class="footer-links">
-                <li><a href="#">Trang chủ</a></li>
-                <li><a href="#">Sản phẩm</a></li>
-                <li><a href="#">Giỏ hàng</a></li>
-                <li><a href="#">Chính sách</a></li>
+                <li><a href="#">HG (High Grade)</a></li>
+                <li><a href="#">MG (Master Grade)</a></li>
+                <li><a href="#">RG (Real Grade)</a></li>
+                <li><a href="#">PG (Perfect Grade)</a></li>
+                
             </ul>
         </div>
+
         
         <div class="footer-section">
             <h3>Liên hệ</h3>
-            <p>Địa chỉ: 123 Đường ABC, Quận XYZ</p>
-            <p>Email: contact: Minh.Đạt Gunpla Shop.com</p>
-            <p>Điện thoại: (84) 123-456-789</p>
+            <p>📍 Địa chỉ: 123 Đường ABC, Quận XYZ</p>
+            <p>📧 Email: MinhDatGunplaShop@gmail.com</p>
+            <p>📞 Hotline: (84) 123-456-789</p>
         </div>
         
+     
         <div class="footer-section">
             <h3>Theo dõi chúng tôi</h3>
-            <p>Cập nhật tin tức mới nhất và khuyến mãi từ chúng tôi</p>
+            <p>Nhận thông tin mới nhất và ưu đãi từ Minh.Đạt Gunpla Shop.</p>
+            <div class="newsletter">
+                <input type="email" placeholder="Nhập email của bạn">
+                <button>Đăng ký</button>
+            </div>
             <div class="social-links">
-                <a href="#">📱</a>
-                <a href="#">💬</a>
-                <a href="#">📷</a>
+                <a href="#"><i class="fa fa-facebook"></i></a>
+                <a href="#"><i class="fa fa-twitter"></i></a>
+                <a href="#"><i class="fa fa-instagram"></i></a>
             </div>
         </div>
     </div>
     
     <div class="copyright">
-        <p>&copy; Copyright 2025 Minh.Đạt Gunpla Shop.</p>
+        <p>&copy; 2025 Minh.Đạt Gunpla Shop. All Rights Reserved.</p>
     </div>
 </footer>
+
+
