@@ -214,7 +214,7 @@
                 </button>
                 <div class="dropdown-menu">
                     <a href="login.jsp">Đăng nhập</a>
-                    <a href="#">Đăng ký</a>
+                    <a href="sign_up.jsp">Đăng ký</a>
                     <a href="#">Tài khoản</a>
                     <a href="#">Đăng xuất</a>
                 </div>
