@@ -4,10 +4,7 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="2dc68175-2f99-4468-8472-5d814dc041ee" name="Changes" comment="ahihi">
-      <change beforePath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_rebase_[Changes]/shelved.patch" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_rebase_[Changes]1/shelved.patch" beforeDir="false" />
-    </list>
+    <list default="true" id="2dc68175-2f99-4468-8472-5d814dc041ee" name="Changes" comment="ahihi" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -106,6 +103,7 @@
       <workItem from="1740010429293" duration="23000" />
       <workItem from="1740363843304" duration="9000" />
       <workItem from="1740727710159" duration="188000" />
+      <workItem from="1740757357102" duration="51000" />
     </task>
     <task id="LOCAL-00001" summary="Minhdeptrai">
       <option name="closed" value="true" />
