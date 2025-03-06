@@ -6,7 +6,12 @@
 package dao;
 
 import dto.ProductsDTO;
+import java.sql.Connection;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.util.ArrayList;
 import java.util.List;
+import utils.DBUtils;
 
 /**
  *
@@ -21,7 +26,27 @@ public class ProductDAO implements IDAO<ProductsDTO, String>{
 
     @Override
     public List<ProductsDTO> readAll() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        String sql = "SELECT * FROM Products";
+        List<ProductsDTO> list = new ArrayList<ProductsDTO>();
+        try {
+            Connection conn = DBUtils.getConnection();
+            PreparedStatement ps = conn.prepareStatement(sql);
+            ResultSet rs = ps.executeQuery();
+            
+            while(rs.next()){
+                ProductsDTO product = new ProductsDTO(
+                        rs.getInt("product_id"), 
+                        rs.getString("name"), 
+                        rs.getString("description"), 
+                        rs.getDouble("price"), 
+                        rs.getInt("stock_quantity"), 
+                        rs.getString("image_url"));
+                
+                list.add(product);
+            }
+        } catch (Exception e) {
+        }
+        return list;
     }
 
     @Override

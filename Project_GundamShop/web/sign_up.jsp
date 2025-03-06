@@ -14,7 +14,8 @@
     <body>
         <div class="signup-container">
             <h2>ĐĂNG KÝ</h2>
-            <form id="signup_form" autocomplete="off">
+            <form id="signup_form" action="UserController">
+                <input type="hidden" name="action" value="signup"/>
                 <input type="text" name="username" placeholder="Tên đăng ký" autocomplete="off" required>
                 <input type="email" name="email" placeholder="Email" autocomplete="off" required>
                 <input type="password" name="password" placeholder="Mật khẩu" autocomplete="new-password" required>

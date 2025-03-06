@@ -13,7 +13,7 @@
         font-family: Arial, sans-serif;
     }
 
-    .header {
+    .header {       
         background-color: #176cd3;
         padding: 1rem 0;
         width: 100%;
@@ -180,10 +180,10 @@
 </style>
 
 <div class="header_logo">
-    <img src="img/gundam.jpg" alt="Gundam Logo"> 
+    <img src="img/gundam.PNG" alt="Gundam Logo"> 
 </div>
 
-<header class="header">
+<header class="header">    
     <div class="container">
         <nav class="nav">
             <a href="#" class="logo">Minh.Đạt Gunpla Shop</a>
@@ -197,12 +197,12 @@
                         <a href="#">MG (Master Grade)</a>
                         <a href="#">PG (Perfect Grade)</a>
                         <a href="#">RG (Real Grade)</a>
-                       
+
                     </div>
                 </li>
                 <li class="menu-item"><a href="#">Giỏ hàng</a></li>
                 <li class="menu-item"><a href="#">Liên hệ</a></li>
-                
+
             </ul>
             <div class="search-bar">
                 <input type="text" class="search-input" placeholder="Tìm kiếm...">

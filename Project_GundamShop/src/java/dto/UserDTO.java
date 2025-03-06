@@ -10,21 +10,31 @@ package dto;
  * @author ADMIN
  */
 public class UserDTO {
-    private String userID;
-    private String fullName;
-    private String roleID;
-    private String password; 
-    
-      public UserDTO() {
-    }
-      
 
-    public UserDTO(String userID, String fullName, String roleID, String password) {
+    private String userID;
+    private String userName;
+    private String roleID;
+    private String password;
+    private String email;
+
+    public UserDTO() {
+    }
+
+    public UserDTO(String userID, String userName, String roleID, String password, String email) {
         this.userID = userID;
-        this.fullName = fullName;
+        this.userName = userName;
         this.roleID = roleID;
         this.password = password;
+        this.email = email;
     }
+
+    public UserDTO(String userName, String password, String email) {
+        this.userName = userName;
+        this.password = password;
+        this.email = email;
+    }
+    
+    
 
     public String getUserID() {
         return userID;
@@ -34,12 +44,12 @@ public class UserDTO {
         this.userID = userID;
     }
 
-    public String getFullName() {
-        return fullName;
+    public String getUserName() {
+        return userName;
     }
 
-    public void setFullName(String fullName) {
-        this.fullName = fullName;
+    public void setUserName(String userName) {
+        this.userName = userName;
     }
 
     public String getRoleID() {
@@ -58,11 +68,19 @@ public class UserDTO {
         this.password = password;
     }
 
+    public String getEmail() {
+        return email;
+    }
+
+    public void setEmail(String email) {
+        this.email = email;
+    }
+
     @Override
     public String toString() {
-        return "UserDTO{" + "userID=" + userID + ", fullName=" + fullName + ", roleID=" + roleID + ", password=" + password + '}';
+        return "UserDTO{" + "userID=" + userID + ", userName=" + userName + ", roleID=" + roleID + ", password=" + password + ", email=" + email + '}';
     }
-    
+ 
 }
 
  

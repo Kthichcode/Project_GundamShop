@@ -6,17 +6,32 @@
 package dao;
 
 import dto.UserDTO;
+import java.sql.Connection;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
 import java.util.List;
+import utils.DBUtils;
 
 /**
  *
  * @author ADMIN
  */
-public class UserDAO implements IDAO<UserDTO, String>{
+public class UserDAO implements IDAO<UserDTO, String> {
 
     @Override
     public boolean create(UserDTO entity) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        String sql = "INSERT INTO Users (username, password_hash, email, role) VALUES\n"
+                + "(?, ?, ?, 'customer')";
+        try {
+            Connection conn = DBUtils.getConnection();
+            PreparedStatement ps = conn.prepareStatement(sql);
+            ps.setString(1, entity.getUserName());
+            ps.setString(2, entity.getPassword());
+            ps.setString(3, entity.getEmail());           
+            ResultSet rs = ps.executeQuery();
+        } catch (Exception e) {
+        }
+        return false;
     }
 
     @Override
@@ -43,5 +58,5 @@ public class UserDAO implements IDAO<UserDTO, String>{
     public List<UserDTO> search(String searchTerm) {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
-    
+
 }

@@ -11,58 +11,78 @@ package dto;
  */
 public class ProductsDTO {
 
-    private int productID;
-    private String productName;
-    private String productImage;
-    private double productPrice;
+    private int product_id;
+    private String name;
+    private String description;
+    private double price;
+    private int stock_quantity;
+    private String image_url;
 
     public ProductsDTO() {
     }
 
-    public ProductsDTO(int productID, String productName, String productImage, double productPrice) {
-        this.productID = productID;
-        this.productName = productName;
-        this.productImage = productImage;
-        this.productPrice = productPrice;
+    public ProductsDTO(int product_id, String name, String description, double price, int stock_quantity, String image_url) {
+        this.product_id = product_id;
+        this.name = name;
+        this.description = description;
+        this.price = price;
+        this.stock_quantity = stock_quantity;
+        this.image_url = image_url;
     }
 
-    public int getProductID() {
-        return productID;
+    public int getProduct_id() {
+        return product_id;
     }
 
-    public void setProductID(int productID) {
-        this.productID = productID;
+    public void setProduct_id(int product_id) {
+        this.product_id = product_id;
     }
 
-    public String getProductName() {
-        return productName;
+    public String getName() {
+        return name;
     }
 
-    public void setProductName(String productName) {
-        this.productName = productName;
+    public void setName(String name) {
+        this.name = name;
     }
 
-    public String getProductImage() {
-        return productImage;
+    public String getDescription() {
+        return description;
     }
 
-    public void setProductImage(String productImage) {
-        this.productImage = productImage;
+    public void setDescription(String description) {
+        this.description = description;
     }
 
-    public double getProductPrice() {
-        return productPrice;
+    public double getPrice() {
+        return price;
     }
 
-    public void setProductPrice(double productPrice) {
-        this.productPrice = productPrice;
+    public void setPrice(double price) {
+        this.price = price;
+    }
+
+    public int getStock_quantity() {
+        return stock_quantity;
+    }
+
+    public void setStock_quantity(int stock_quantity) {
+        this.stock_quantity = stock_quantity;
+    }
+
+    public String getImage_url() {
+        return image_url;
+    }
+
+    public void setImage_url(String image_url) {
+        this.image_url = image_url;
     }
 
     @Override
     public String toString() {
-        return "ProductsDTO{" + "productID=" + productID + ", productName=" + productName + ", productImage=" + productImage + ", productPrice=" + productPrice + '}';
+        return "ProductsDTO{" + "product_id=" + product_id + ", name=" + name + ", description=" + description + ", price=" + price + ", stock_quantity=" + stock_quantity + ", image_url=" + image_url + '}';
     }
     
     
-
+    
 }
