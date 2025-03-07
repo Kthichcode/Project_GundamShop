@@ -9,13 +9,19 @@
         <title>JSP Page</title>
     </head>   
     <body>
-        
+
+        <h3 style="color: red">
+            <c:out value="${requestScope.mess}"/>
+        </h3>
+
+
         <div class="login-container">
             <h3 style="color: green"><c:out value="${requestScope.mess}"></c:out></h3>
             <h2>ĐĂNG NHẬP</h2>
-            <form id="login_form" action="UserController">
-                <input type="text" placeholder="Tên đăng nhập" required>
-                <input type="password" placeholder="Mật khẩu" required>
+            <form id="login_form" action="UserController" method="POST">
+                <input type="hidden" name="action" value="login">
+                <input type="text" id="userName" name="txtUserName" placeholder="Tên đăng nhập" required>
+                <input type="password" id="passWord" name="txtPassword" placeholder="Mật khẩu" required>
                 <button type="submit">Đăng nhập</button>
                 <hr>
                 <div>Bạn chưa có tài khoản ?</div>
@@ -23,7 +29,7 @@
                 <a href="home.jsp" class="home-button">Quay về trang chủ</a>
             </form>
         </div>
-        
+
     </body>
 
     <style>

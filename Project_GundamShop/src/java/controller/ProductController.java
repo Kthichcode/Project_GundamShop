@@ -18,22 +18,32 @@ import javax.servlet.http.HttpServletResponse;
 
 @WebServlet(name = "ProductController", urlPatterns = {"/ProductController"})
 public class ProductController extends HttpServlet {
-    
+
     private static final String LOGIN_PAGE = "login.jsp";
     private static final String SIGN_UP_PAGE = "sign_up.jsp";
     private static final String HOME_PAGE = "home.jsp";
-    
+
     private ProductDAO pd = new ProductDAO();
-    
+
     public String processPrintAll(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         String url = HOME_PAGE;
-        List<ProductsDTO> list = pd.readAll();
+        String categoryIdStr = request.getParameter("categoryId");
+        List<ProductsDTO> list;
+
+        if (categoryIdStr == null || categoryIdStr.trim().isEmpty()) {
+            
+            list = pd.readAll();
+        } else {
+           
+            int categoryId = Integer.parseInt(categoryIdStr);
+            list = pd.readByCategory(categoryId);
+        }
+
         request.setAttribute("list", list);
-        
         return url;
     }
-    
+
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");

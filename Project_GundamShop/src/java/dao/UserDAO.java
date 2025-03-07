@@ -27,7 +27,7 @@ public class UserDAO implements IDAO<UserDTO, String> {
             PreparedStatement ps = conn.prepareStatement(sql);
             ps.setString(1, entity.getUserName());
             ps.setString(2, entity.getPassword());
-            ps.setString(3, entity.getEmail());           
+            ps.setString(3, entity.getEmail());
             ResultSet rs = ps.executeQuery();
         } catch (Exception e) {
         }
@@ -41,7 +41,25 @@ public class UserDAO implements IDAO<UserDTO, String> {
 
     @Override
     public UserDTO readById(String id) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        String sql = "SELECT * FROM Users WHERE username = ?";
+        try (Connection conn = DBUtils.getConnection();
+                PreparedStatement ps = conn.prepareStatement(sql)) {
+            ps.setString(1, id);
+            try (ResultSet rs = ps.executeQuery()) {
+                if (rs.next()) {
+                    UserDTO user = new UserDTO();
+                    user.setUserID(rs.getString("user_id")); 
+                    user.setUserName(rs.getString("username"));
+                    user.setPassword(rs.getString("password_hash"));
+                    user.setEmail(rs.getString("email"));
+                    user.setRoleID(rs.getString("role")); 
+                    return user;
+                }
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return null;
     }
 
     @Override

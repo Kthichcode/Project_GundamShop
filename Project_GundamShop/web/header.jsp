@@ -13,7 +13,7 @@
         font-family: Arial, sans-serif;
     }
 
-    .header {       
+    .header {
         background-color: #176cd3;
         padding: 1rem 0;
         width: 100%;
@@ -176,6 +176,11 @@
             width: 100%;
             justify-content: center;
         }
+
+
+
+
+
     }
 </style>
 
@@ -183,31 +188,40 @@
     <img src="img/gundam.PNG" alt="Gundam Logo"> 
 </div>
 
-<header class="header">    
+<header class="header">
     <div class="container">
         <nav class="nav">
-            <a href="#" class="logo">Minh.Đạt Gunpla Shop</a>
+        
+            <a href="ProductController" class="logo">Minh.Đạt Gunpla Shop</a>
+
+            
             <ul class="menu">
-                <li class="menu-item"><a href="#">Trang chủ</a></li>
+                <li class="menu-item"><a href="ProductController">Trang chủ</a></li>
+
+                
                 <li class="menu-item dropdown">
                     <a href="#">Sản phẩm</a>
                     <div class="dropdown-content">
-                        <a href="#">SD (Super Deformed)</a>
-                        <a href="#">HG (High Grade)</a>
-                        <a href="#">MG (Master Grade)</a>
-                        <a href="#">PG (Perfect Grade)</a>
-                        <a href="#">RG (Real Grade)</a>
+                        
+                        <a href="ProductController?action=filterCategory&categoryId=3">SD (Super Deformed)  </a>
+                        <a href="ProductController?action=filterCategory&categoryId=1">HG (High Grade)  </a>
+                        <a href="ProductController?action=filterCategory&categoryId=2">MG (Master Grade)  </a>
+                        <a href="ProductController?action=filterCategory&categoryId=4">PG (Perfect Grade)  </a>
 
                     </div>
                 </li>
+
                 <li class="menu-item"><a href="#">Giỏ hàng</a></li>
                 <li class="menu-item"><a href="#">Liên hệ</a></li>
-
             </ul>
+
+            <!-- Search bar -->
             <div class="search-bar">
                 <input type="text" class="search-input" placeholder="Tìm kiếm...">
                 <button class="search-button">🔍</button>
             </div>
+
+            <!-- User menu -->
             <div class="user-menu">
                 <button class="user-icon">
                     <img src="icon/user.png" alt="User Icon">
