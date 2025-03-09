@@ -10,9 +10,7 @@
     </head>   
     <body>
 
-        <h3 style="color: red">
-            <c:out value="${requestScope.mess}"/>
-        </h3>
+        
 
 
         <div class="login-container">

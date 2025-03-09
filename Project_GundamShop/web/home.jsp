@@ -1,12 +1,13 @@
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <!DOCTYPE html>
 <html>
     <head>
         <meta charset="UTF-8">
         <title>Minh.Đạt Gunpla Shop - Home</title>
         <style>
-          
+
             body {
                 margin: 0;
                 padding: 0;
@@ -14,7 +15,7 @@
                 background-color: #f5f5f5;
             }
 
-           
+
             .slideshow-container {
                 position: relative;
                 max-width: 1200px; 
@@ -71,7 +72,7 @@
                 background-color: #555;
             }
 
-          
+
             .filter-container {
                 max-width: 1200px;
                 margin: 20px auto;
@@ -83,7 +84,7 @@
                 font-size: 14px;
             }
 
-           
+
             .product-container {
                 display: flex;
                 flex-wrap: wrap;
@@ -140,7 +141,7 @@
     <body>
         <%@ include file="header.jsp" %>
 
-       
+
         <div class="slideshow-container">
             <div class="mySlides">
                 <img src="img/Ahihi.jpg" alt="Banner 1">
@@ -164,7 +165,7 @@
             <span class="dot" onclick="currentSlide(4)"></span>
         </div>
 
-       
+
         <div class="filter-container">
             <form action="ProductController" method="GET">
                 <label for="category">Chọn danh mục:</label>
@@ -180,20 +181,24 @@
             </form>
         </div>
 
-       
+
         <div class="product-container">
             <c:forEach var="p" items="${list}">
                 <div class="product-card">
                     <img src="img/${p.image_url}" alt="${p.name}">
                     <h3>${p.name}</h3>
-                    <p class="price">${p.price}</p>
+                    <p class="price">
+                        <fmt:formatNumber value="${p.price}" pattern="#,##0" /> đ
+
+                    </p>
                 </div>
             </c:forEach>
         </div>
 
+
         <%@ include file="footer.jsp" %>
 
-        
+
         <script>
             let slideIndex = 1;
             showSlides(slideIndex);

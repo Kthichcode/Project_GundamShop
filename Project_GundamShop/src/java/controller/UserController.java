@@ -20,7 +20,7 @@ import utils.AuthUtils;
 
 /**
  *
- * @author tamph
+ * @author ADMIN
  */
 @WebServlet(name = "UserController", urlPatterns = {"/UserController"})
 public class UserController extends HttpServlet {
@@ -44,45 +44,40 @@ public class UserController extends HttpServlet {
         request.setAttribute("mess", "Sign Up successfully");
         return url;
     }
-    
-    
+
     private String processLogin(HttpServletRequest request, HttpServletResponse response)
-        throws ServletException, IOException {
-          String url = LOGIN_PAGE; 
-    String userName = request.getParameter("txtUserName");
-    String password = request.getParameter("txtPassword");
-    
-    if(AuthUtils.isValidLogin(userName, password)) {
-     UserDTO user = AuthUtils.getUser(userName);
-     HttpSession session = request.getSession();
-     session.setAttribute("user", user);
-     url = HOME_PAGE;
-    } else {
-        request.setAttribute("mess", "Invalid username or password");
-        url = "login.jsp";
+            throws ServletException, IOException {
+        String url = LOGIN_PAGE;
+        String userName = request.getParameter("txtUserName");
+        String password = request.getParameter("txtPassword");
+
+        if (AuthUtils.isValidLogin(userName, password)) {
+            UserDTO user = AuthUtils.getUser(userName);
+            HttpSession session = request.getSession();
+            session.setAttribute("user", user);
+            session.setAttribute("mess", "Hello" + " " + userName + "!");
+            url = "ProductController?action=showAll";
+
+        } else {
+            request.setAttribute("mess", "Invalid username or password");
+            url = "login.jsp";
+        }
+
+        return url;
     }
-    
-    return url;
-    }
-    
-    
-    
-     private String processLogout(HttpServletRequest request, HttpServletResponse response)
+
+    private String processLogout(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         String url = LOGIN_PAGE;
         //
         HttpSession session = request.getSession();
         if (AuthUtils.isLoggedIn(session)) {
             request.getSession().invalidate(); // Hủy bỏ session
-            url = "login.jsp";
+            url = "ProductController?action=showAll";
         }
-        
+
         return url;
     }
-     
-     
-     
-     
 
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
@@ -91,28 +86,26 @@ public class UserController extends HttpServlet {
         String url = HOME_PAGE;
         try {
             String action = request.getParameter("action");
-            if (action == null){
-               url = HOME_PAGE;
+            if (action == null) {
+                url = HOME_PAGE;
             }
 
             if (action.equals("signup")) {
                 url = processSignUp(request, response);
             } else if (action.equals("login")) {
                 url = processLogin(request, response);
-            } 
-                
-            
+            } else if ("logout".equals(action)) {
+                url = processLogout(request, response);
+            }
+
         } catch (Exception e) {
-             log("Error at MainController: " + e.toString());
+            log("Error at MainController: " + e.toString());
 
         } finally {
             request.getRequestDispatcher(url).forward(request, response);
         }
 
     }
-    
-    
-   
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
     /**

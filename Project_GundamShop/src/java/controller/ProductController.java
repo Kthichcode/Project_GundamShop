@@ -15,6 +15,8 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
+import utils.AuthUtils;
 
 @WebServlet(name = "ProductController", urlPatterns = {"/ProductController"})
 public class ProductController extends HttpServlet {
@@ -32,10 +34,10 @@ public class ProductController extends HttpServlet {
         List<ProductsDTO> list;
 
         if (categoryIdStr == null || categoryIdStr.trim().isEmpty()) {
-            
+
             list = pd.readAll();
         } else {
-           
+
             int categoryId = Integer.parseInt(categoryIdStr);
             list = pd.readByCategory(categoryId);
         }
@@ -44,11 +46,52 @@ public class ProductController extends HttpServlet {
         return url;
     }
 
+    public String processSearch(HttpServletRequest request, HttpServletResponse response)
+            throws ServletException, IOException {
+        HttpSession session = request.getSession();
+
+        if (!AuthUtils.isLoggedIn(session)) {
+            return LOGIN_PAGE;
+        }
+
+        String searchTerm = request.getParameter("searchTerm");
+        if (searchTerm == null) {
+            searchTerm = "";
+        }
+
+        List<ProductsDTO> products = pd.searchByTitle(searchTerm);
+
+        request.setAttribute("list", products);
+
+        request.setAttribute("searchTerm", searchTerm);
+
+        return HOME_PAGE;
+    }
+
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
-        String url = processPrintAll(request, response);
-        request.getRequestDispatcher(url).forward(request, response);
+
+        String action = request.getParameter("action");
+        String url = HOME_PAGE;
+
+        try {
+            if (action == null || action.trim().isEmpty()) {
+
+                url = processPrintAll(request, response);
+            } else if ("search".equals(action)) {
+
+                url = processSearch(request, response);
+            } else {
+
+                url = processPrintAll(request, response);
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        } finally {
+
+            request.getRequestDispatcher(url).forward(request, response);
+        }
     }
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
