@@ -230,13 +230,14 @@
                 <li class="menu-item"><a href="#">Liên hệ</a></li>
             </ul>
 
+            <c:set var="searchTerm" value="${requestScope.searchTerm==null?'':requestScope.searchTerm}" />
 
             <div class="search-bar">
                 <form action="ProductController" method="GET">
 
                     <input type="hidden" name="action" value="search" />
                     <input type="text" name="searchTerm" class="search-input" placeholder="Tìm kiếm..." />
-                    <button class="search-button">🔍</button>
+                    <button class="search-button" value="${searchTerm}">🔍</button>
                 </form>
             </div>
 
