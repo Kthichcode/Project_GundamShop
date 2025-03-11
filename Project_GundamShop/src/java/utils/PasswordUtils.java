@@ -71,7 +71,7 @@ public class PasswordUtils {
         ALTER TABLE [dbo].[tblUsers]
         ALTER COLUMN [password] [varchar](250) NOT NULL;
         */
-       // migratePasswords();
+       //migratePasswords();
         
     }
 }
