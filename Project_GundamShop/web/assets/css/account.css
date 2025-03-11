@@ -1,0 +1,68 @@
+/* account.css */
+
+/* Toàn trang */
+body {
+  margin: 0;
+  padding: 0;
+  font-family: Arial, sans-serif;
+  background-color: #2196F3; /* Nền xanh */
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;             /* Chiều cao phủ toàn màn hình */
+  color: #333;
+}
+
+/* Khung trắng ở giữa */
+.container {
+  background-color: #fff;
+  width: 320px;
+  padding: 30px;
+  border-radius: 8px;
+  box-shadow: 0 0 10px rgba(0,0,0,0.15);
+  text-align: center;
+}
+
+/* Tiêu đề */
+.container h1 {
+  margin-bottom: 20px;
+  font-size: 1.4rem;
+  text-transform: uppercase;
+  color: #333;
+}
+
+/* Đoạn văn */
+.container p {
+  margin: 10px 0;
+  font-size: 1rem;
+  line-height: 1.4;
+}
+
+/* Link thường (Đăng nhập, Đăng ký) */
+.container a {
+  color: #1976D2;
+  text-decoration: none;
+  font-weight: 600;
+}
+
+.container a:hover {
+  text-decoration: underline;
+}
+
+/* Nút Quay lại trang chủ (nền trắng, viền xanh) */
+.btn-home {
+  display: inline-block;
+  margin-top: 20px;
+  padding: 10px 20px;
+  background-color: #fff;       /* Nền trắng */
+  color: #1976D2;              /* Chữ xanh */
+  border: 2px solid #1976D2;   /* Viền xanh */
+  border-radius: 4px;
+  text-decoration: none;
+  font-weight: 600;
+}
+
+.btn-home:hover {
+  background-color: #1976D2;    /* Đổi thành nền xanh khi hover */
+  color: #fff;                  /* Chữ trắng khi hover */
+}

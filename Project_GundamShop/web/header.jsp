@@ -46,7 +46,7 @@
                 <div class="dropdown-menu">
                     <a href="login.jsp">Đăng nhập</a>
                     <a href="sign_up.jsp">Đăng ký</a>
-                    <a href="#">Tài khoản</a>
+                    <a href="account.jsp">Tài khoản</a>
                     <a href="UserController?action=logout">Đăng xuất</a>
                 </div>
             </div>
