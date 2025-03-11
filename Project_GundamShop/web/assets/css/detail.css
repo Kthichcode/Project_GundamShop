@@ -1,0 +1,122 @@
+body {
+    text-align: center;
+    background-color: #f5f5f5;
+    margin: 0;
+}
+
+.container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    max-width: 900px;
+    margin: 50px auto; /* Căn giữa theo chiều ngang và tạo khoảng cách với header/footer */
+    background: white;
+    padding: 30px;
+    border-radius: 10px;
+    box-shadow: 0 0 15px rgba(0, 0, 0, 0.2);
+}
+
+.left {
+    flex: 1;
+    text-align: center;
+}
+
+.main-image img {
+    width: 100%;
+    border-radius: 10px;
+}
+
+.right {
+    flex: 1;
+    padding-left: 30px;
+    text-align: left;
+}
+
+.title {
+    font-size: 22px;
+    font-weight: bold;
+    margin-bottom: 10px;
+}
+
+.status {
+    color: green;
+    font-size: 18px;
+    font-weight: bold;
+}
+
+.price {
+    font-size: 28px;
+    font-weight: bold;
+    color: #007bff;
+    margin: 15px 0;
+}
+
+.quantity {
+    display: flex;
+    align-items: center;
+    margin: 15px 0;
+    font-size: 20px;
+}
+
+.quantity button {
+    padding: 8px 15px;
+    font-size: 20px;
+    border: 1px solid #ccc;
+    background: #fff;
+    cursor: pointer;
+}
+
+.quantity input {
+    width: 50px;
+    text-align: center;
+    font-size: 20px;
+    margin: 0 10px;
+    border: 1px solid #ccc;
+}
+
+.buttons {
+    display: flex;
+    gap: 15px;
+    margin-top: 20px;
+}
+
+.btn {
+    flex: 1;
+    padding: 15px;
+    font-size: 18px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+.btn-cart {
+    background-color: #007bff;
+    color: white;
+}
+
+.btn-buy {
+    background-color: #ffc107;
+    color: black;
+}
+
+/* Đảm bảo responsive trên màn hình nhỏ */
+@media (max-width: 768px) {
+    .container {
+        flex-direction: column;
+        width: 90%;
+        padding: 20px;
+    }
+
+    .right {
+        padding-left: 0;
+        text-align: center;
+    }
+
+    .quantity {
+        justify-content: center;
+    }
+
+    .buttons {
+        flex-direction: column;
+    }
+}

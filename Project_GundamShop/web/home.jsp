@@ -50,11 +50,10 @@
                 <button type="submit">Lọc</button>
             </form>
         </div>
-
-
+        
         <div class="product-container">
             <c:forEach var="p" items="${list}">
-                <a href="ProductController?id=${p.product_id}" class="product-link">
+                <a href="ProductController?id=${p.product_id}&action=detail" class="product-link">
                     <div class="product-card">
                         <img src="img/${p.image_url}" alt="${p.name}">
                         <h3>${p.name}</h3>

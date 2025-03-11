@@ -9,10 +9,6 @@
         <title>JSP Page</title>
     </head>   
     <body>
-
-        
-
-
         <div class="login-container">
             <h3 style="color: green"><c:out value="${requestScope.mess}"></c:out></h3>
             <h2>ĐĂNG NHẬP</h2>

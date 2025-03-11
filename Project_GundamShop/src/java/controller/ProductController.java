@@ -68,6 +68,19 @@ public class ProductController extends HttpServlet {
         return HOME_PAGE;
     }
 
+    public String processDetail(HttpServletRequest request, HttpServletResponse response)
+            throws ServletException, IOException {
+        HttpSession session = request.getSession();
+        String url = HOME_PAGE;
+
+        int id = Integer.parseInt(request.getParameter("id"));
+        ProductsDTO product = pd.readById(id);
+        request.setAttribute("product", product);
+        url = "productDetail.jsp";
+
+        return url;
+    }
+
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
@@ -77,13 +90,12 @@ public class ProductController extends HttpServlet {
 
         try {
             if (action == null || action.trim().isEmpty()) {
-
                 url = processPrintAll(request, response);
             } else if ("search".equals(action)) {
-
                 url = processSearch(request, response);
+            } else if (action.equals("detail")) {
+                url = processDetail(request, response);
             } else {
-
                 url = processPrintAll(request, response);
             }
         } catch (Exception e) {

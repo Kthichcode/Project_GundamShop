@@ -17,7 +17,7 @@ import utils.DBUtils;
  *
  * @author ADMIN
  */
-public class ProductDAO implements IDAO<ProductsDTO, String> {
+public class ProductDAO implements IDAO<ProductsDTO, Integer> {
 
     @Override
     public boolean create(ProductsDTO entity) {
@@ -51,17 +51,7 @@ public class ProductDAO implements IDAO<ProductsDTO, String> {
     }
 
     @Override
-    public ProductsDTO readById(String id) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-    }
-
-    @Override
     public boolean update(ProductsDTO entity) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-    }
-
-    @Override
-    public boolean delete(String id) {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 
@@ -72,7 +62,7 @@ public class ProductDAO implements IDAO<ProductsDTO, String> {
 
     public List<ProductsDTO> searchByTitle(String searchTerm) {
 
-       String sql = "SELECT * FROM Products WHERE name LIKE ? AND stock_quantity > 0";
+        String sql = "SELECT * FROM Products WHERE name LIKE ? AND stock_quantity > 0";
         List<ProductsDTO> list = new ArrayList<ProductsDTO>();
 
         try {
@@ -120,6 +110,36 @@ public class ProductDAO implements IDAO<ProductsDTO, String> {
             e.printStackTrace();
         }
         return list;
+    }
+
+    @Override
+    public ProductsDTO readById(Integer id) {
+        String sql = "SELECT * FROM Products WHERE product_id = ?";
+        try {
+            Connection conn = DBUtils.getConnection();
+            PreparedStatement ps = conn.prepareStatement(sql);
+            ps.setInt(1, id);
+            ResultSet rs= ps.executeQuery();
+            
+            while(rs.next()){
+                ProductsDTO p = new ProductsDTO(
+                        rs.getInt("product_id"),
+                        rs.getString("name"),
+                        rs.getString("description"),
+                        rs.getDouble("price"),
+                        rs.getInt("stock_quantity"),
+                        rs.getString("image_url"));
+                return p;
+            }                   
+        } catch (Exception e) {
+            
+        }
+        return null;
+    }
+
+    @Override
+    public boolean delete(Integer id) {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 
 }
