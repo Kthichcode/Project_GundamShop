@@ -42,6 +42,7 @@ public class CartController extends HttpServlet {
                 int quantity = Integer.parseInt(request.getParameter("quantity"));
                 // Lấy thông tin sản phẩm
                 ProductsDTO product = productDAO.readById(productId);
+                
                 if (product != null) {
                     boolean found = false;
                     for (CartDTO item : sessionCart) {
@@ -52,10 +53,11 @@ public class CartController extends HttpServlet {
                         }
                     }
                     if (!found) {
-                        CartDTO newItem = new CartDTO(productId, product.getName(), product.getPrice(), quantity);
+                        CartDTO newItem = new CartDTO(productId, product.getName(), product.getPrice(), quantity, product.getImage_url());
                         sessionCart.add(newItem);
                     }
                 }
+                request.setAttribute("product", product);
                 response.sendRedirect("CartController?action=view");
             } else if ("view".equals(action)) {
                 request.setAttribute("CART_ITEMS", sessionCart);
@@ -79,7 +81,7 @@ public class CartController extends HttpServlet {
                 response.sendRedirect("CartController?action=view");
             } else {
                 response.sendRedirect("CartController?action=view");
-            }
+            }           
         }
         // Nếu đã đăng nhập: lưu giỏ hàng vào DB (logged-in mode)
         else {
@@ -90,6 +92,7 @@ public class CartController extends HttpServlet {
                 if (product != null) {
                     cartDAO.addOrUpdateCart(userId, productId, quantity);
                 }
+                request.setAttribute("product", product);
                 response.sendRedirect("CartController?action=view");
             } else if ("view".equals(action)) {
                 List<CartDTO> cartItems = cartDAO.getCartByUser(userId);

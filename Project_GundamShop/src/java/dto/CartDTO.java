@@ -15,17 +15,18 @@ public class CartDTO {
     private String productName;
     private double price;
     private int quantity;
-
+    private String img;
     // Constructor không đối số
     public CartDTO() {
     }
 
     // Constructor đầy đủ
-    public CartDTO(int productId, String productName, double price, int quantity) {
+    public CartDTO(int productId, String productName, double price, int quantity, String img) {
         this.productId = productId;
         this.productName = productName;
         this.price = price;
         this.quantity = quantity;
+        this.img = img;
     }
 
     // Getters & Setters
@@ -65,6 +66,15 @@ public class CartDTO {
     public double getSubtotal() {
         return price * quantity;
     }
+
+    public String getImg() {
+        return img;
+    }
+
+    public void setImg(String img) {
+        this.img = img;
+    }
+    
 
     @Override
     public String toString() {
