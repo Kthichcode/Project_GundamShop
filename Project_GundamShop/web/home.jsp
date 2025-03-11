@@ -6,137 +6,7 @@
     <head>
         <meta charset="UTF-8">
         <title>Minh.Đạt Gunpla Shop - Home</title>
-        <style>
-
-            body {
-                margin: 0;
-                padding: 0;
-                font-family: Arial, sans-serif;
-                background-color: #f5f5f5;
-            }
-
-
-            .slideshow-container {
-                position: relative;
-                max-width: 1200px; 
-                margin: 20px auto; 
-                overflow: hidden;  
-                border-radius: 8px; 
-            }
-            .mySlides {
-                display: none;
-            }
-            .mySlides img {
-                width: 100%;
-                display: block;
-            }
-            .prev, .next {
-                cursor: pointer;
-                position: absolute;
-                top: 50%;
-                width: auto;
-                margin-top: -22px;
-                padding: 16px;
-                color: white;
-                font-weight: bold;
-                font-size: 18px;
-                transition: 0.6s ease;
-                border-radius: 0 3px 3px 0;
-                user-select: none;
-            }
-            .next {
-                right: 0;
-                border-radius: 3px 0 0 3px;
-            }
-            .prev:hover, .next:hover {
-                background-color: rgba(0,0,0,0.4);
-            }
-            .dot-container {
-                text-align: center;
-                margin: 10px 0;
-            }
-            .dot {
-                cursor: pointer;
-                height: 15px;
-                width: 15px;
-                margin: 0 5px;
-                background-color: #bbb;
-                border-radius: 50%;
-                display: inline-block;
-                transition: background-color 0.6s ease;
-            }
-            .active-dot {
-                background-color: #717171;
-            }
-            .dot:hover {
-                background-color: #555;
-            }
-
-
-            .filter-container {
-                max-width: 1200px;
-                margin: 20px auto;
-                text-align: center;
-            }
-            .filter-container select, .filter-container button {
-                padding: 8px 12px;
-                margin: 5px;
-                font-size: 14px;
-            }
-
-
-            .product-container {
-                display: flex;
-                flex-wrap: wrap;
-                justify-content: space-between;
-                max-width: 1200px;
-                margin: 20px auto;
-            }
-            .product-card {
-                background-color: #fff;
-                border: 1px solid #ddd;
-                border-radius: 5px;
-                width: 23%; /* 4 cột */
-                margin-bottom: 20px;
-                text-align: center;
-                position: relative;
-                padding: 10px;
-                box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
-            }
-            .product-card img {
-                width: 100%;
-                height: 200px; 
-                object-fit: cover; 
-                border-bottom: 1px solid #ddd;
-            }
-            .product-card h3 {
-                font-size: 14px;
-                margin: 10px 0;
-                color: #333;
-            }
-            .product-card .price {
-                font-size: 16px;
-                font-weight: bold;
-                color: #e74c3c;
-                margin: 5px 0;
-            }
-            .product-card .original-price {
-                font-size: 14px;
-                color: #999;
-                text-decoration: line-through;
-                margin-left: 5px;
-            }
-            .product-card .discount {
-                position: absolute;
-                top: 10px;
-                right: 10px;
-                background-color: #e74c3c;
-                color: #fff;
-                font-size: 12px;
-                padding: 2px 5px;
-                border-radius: 3px;
-            }
-        </style>
+        <link rel="stylesheet" href="assets/css/home.css">
     </head>
     <body>
         <%@ include file="header.jsp" %>
@@ -184,14 +54,15 @@
 
         <div class="product-container">
             <c:forEach var="p" items="${list}">
-                <div class="product-card">
-                    <img src="img/${p.image_url}" alt="${p.name}">
-                    <h3>${p.name}</h3>
-                    <p class="price">
-                        <fmt:formatNumber value="${p.price}" pattern="#,##0" /> đ
-
-                    </p>
-                </div>
+                <a href="ProductController?id=${p.product_id}" class="product-link">
+                    <div class="product-card">
+                        <img src="img/${p.image_url}" alt="${p.name}">
+                        <h3>${p.name}</h3>
+                        <p class="price">
+                            <fmt:formatNumber value="${p.price}" pattern="#,##0" /> đ
+                        </p>
+                    </div>
+                </a>
             </c:forEach>
         </div>
 
@@ -251,6 +122,7 @@
                 dots[autoIndex - 1].className += " active-dot";
                 setTimeout(autoSlide, 3000);
             }
+
         </script>
     </body>
 </html>
