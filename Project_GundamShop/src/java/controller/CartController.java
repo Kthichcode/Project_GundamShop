@@ -27,6 +27,7 @@ public class CartController extends HttpServlet {
             action = "view";
         }
         
+
         if (userId == null) {
             @SuppressWarnings("unchecked")
             List<CartDTO> sessionCart = (List<CartDTO>) session.getAttribute("SESSION_CART");
@@ -34,12 +35,12 @@ public class CartController extends HttpServlet {
                 sessionCart = new ArrayList<>();
                 session.setAttribute("SESSION_CART", sessionCart);
             }
-            
+
             if ("add".equals(action)) {
                 int productId = Integer.parseInt(request.getParameter("productId"));
                 int quantity = Integer.parseInt(request.getParameter("quantity"));
                 ProductsDTO product = productDAO.readById(productId);
-                
+
                 if (product != null) {
                     boolean found = false;
                     for (CartDTO item : sessionCart) {
@@ -55,7 +56,7 @@ public class CartController extends HttpServlet {
                     }
                 }
                 request.setAttribute("product", product);
-                response.sendRedirect("CartController?action=view");
+                response.sendRedirect("ProductController?action=productDetail&product_id=" + productId);
             } else if ("view".equals(action)) {
                 request.setAttribute("CART_ITEMS", sessionCart);
                 request.getRequestDispatcher("cart.jsp").forward(request, response);
@@ -78,18 +79,19 @@ public class CartController extends HttpServlet {
                 response.sendRedirect("CartController?action=view");
             } else {
                 response.sendRedirect("CartController?action=view");
-            }           
-        }       
+            }
+        }
     }
 
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-         processRequest(request, response);
+        processRequest(request, response);
     }
+
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-         processRequest(request, response);
+        processRequest(request, response);
     }
 }
