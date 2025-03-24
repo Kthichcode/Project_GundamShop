@@ -58,8 +58,11 @@ public class ProductDAO implements IDAO<ProductsDTO, Integer> {
                         rs.getString("name"),
                         rs.getString("description"),
                         rs.getDouble("price"),
+                        rs.getInt("category_id"),
                         rs.getInt("stock_quantity"),
-                        rs.getString("image_url"));
+                        rs.getString("image_url"),
+                        rs.getBoolean("status")
+                );
 
                 list.add(product);
             }
@@ -90,15 +93,18 @@ public class ProductDAO implements IDAO<ProductsDTO, Integer> {
             ps.setString(1, "%" + searchTerm + "%");
             ResultSet rs = ps.executeQuery();
             while (rs.next()) {
-                ProductsDTO b = new ProductsDTO(
+                ProductsDTO product = new ProductsDTO(
                         rs.getInt("product_id"),
                         rs.getString("name"),
                         rs.getString("description"),
                         rs.getDouble("price"),
+                        rs.getInt("category_id"),
                         rs.getInt("stock_quantity"),
-                        rs.getString("image_url"));
+                        rs.getString("image_url"),
+                        rs.getBoolean("status")
+                );
 
-                list.add(b);
+                list.add(product);
             }
         } catch (Exception e) {
             System.out.println(e.toString());
@@ -141,14 +147,17 @@ public class ProductDAO implements IDAO<ProductsDTO, Integer> {
             ResultSet rs = ps.executeQuery();
 
             while (rs.next()) {
-                ProductsDTO p = new ProductsDTO(
+                ProductsDTO product = new ProductsDTO(
                         rs.getInt("product_id"),
                         rs.getString("name"),
                         rs.getString("description"),
                         rs.getDouble("price"),
+                        rs.getInt("category_id"),
                         rs.getInt("stock_quantity"),
-                        rs.getString("image_url"));
-                return p;
+                        rs.getString("image_url"),
+                        rs.getBoolean("status")
+                );
+                return product;
             }
         } catch (Exception e) {
 
@@ -178,8 +187,10 @@ public class ProductDAO implements IDAO<ProductsDTO, Integer> {
                         rs.getString("name"),
                         rs.getString("description"),
                         rs.getDouble("price"),
+                        rs.getInt("category_id"),
                         rs.getInt("stock_quantity"),
-                        rs.getString("image_url")
+                        rs.getString("image_url"),
+                        rs.getBoolean("status")
                 );
                 products.add(product);
             }
@@ -224,8 +235,10 @@ public class ProductDAO implements IDAO<ProductsDTO, Integer> {
                         rs.getString("name"),
                         rs.getString("description"),
                         rs.getDouble("price"),
+                        rs.getInt("category_id"),
                         rs.getInt("stock_quantity"),
-                        rs.getString("image_url")
+                        rs.getString("image_url"),
+                        rs.getBoolean("status")
                 );
                 products.add(product);
             }

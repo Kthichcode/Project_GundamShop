@@ -18,18 +18,23 @@ public class ProductsDTO {
     private int category_id;
     private int stock_quantity;
     private String image_url;
+    private boolean status;
 
     public ProductsDTO() {
     }
 
-    public ProductsDTO(int product_id, String name, String description, double price, int stock_quantity, String image_url) {
+    public ProductsDTO(int product_id, String name, String description, double price, int category_id, int stock_quantity, String image_url, boolean status) {
         this.product_id = product_id;
         this.name = name;
         this.description = description;
         this.price = price;
+        this.category_id = category_id;
         this.stock_quantity = stock_quantity;
         this.image_url = image_url;
+        this.status = status;
     }
+
+    
 
     public ProductsDTO(String name, String description, double price, int category_id, int stock_quantity, String image_url) {
         this.name = name;
@@ -95,6 +100,16 @@ public class ProductsDTO {
     public void setCategory_id(int category_id) {
         this.category_id = category_id;
     }
+
+    public boolean isStatus() {
+        return status;
+    }
+
+    public void setStatus(boolean status) {
+        this.status = status;
+    }
+    
+    
      
 
     @Override

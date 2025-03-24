@@ -5,7 +5,9 @@
  */
 package controller;
 
+import dao.CategoryDAO;
 import dao.ProductDAO;
+import dto.CategoryDTO;
 import dto.ProductsDTO;
 import java.awt.print.Book;
 import java.io.IOException;
@@ -27,6 +29,7 @@ public class AdminController extends HttpServlet {
 
     private static final String MANAGE_PAGE = "manager.jsp";
     private ProductDAO pd = new ProductDAO();
+    private CategoryDAO cd = new CategoryDAO();
 
     public String processPrintAll(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
@@ -74,10 +77,13 @@ public class AdminController extends HttpServlet {
         if (AuthUtils.isAdmin(session)) {
             int id = Integer.parseInt(request.getParameter("id"));
             ProductsDTO product = pd.readById(id);
+            List<CategoryDTO> listC = cd.readAll();
+            
             if (product != null) {
                 request.setAttribute("product", product);
                 request.setAttribute("action", "update");
-                url = "manager.jsp";
+                request.setAttribute("listC", listC);
+                url = "productForm.jsp";
             } else {
                 url = processSearch(request, response);
             }
@@ -100,7 +106,9 @@ public class AdminController extends HttpServlet {
                 
                 ProductsDTO product = new ProductsDTO(name, description, price, category_id, stock_quantity, image_url);
                 pd.create(product);
+                List<CategoryDTO> listC = cd.readAll();
                 url = "productForm.jsp";
+                request.setAttribute("listC", listC);
                 request.setAttribute("mess", "Create successful");
             } catch (Exception e) {
             }
@@ -123,6 +131,8 @@ public class AdminController extends HttpServlet {
                     url = processSearch(request, response);
                 }else if(action.equals("create")){
                     url = processCreate(request, response);
+                }else if(action.equals("edit")){
+                    url = processEdit(request, response);
                 }
             }
         } catch (Exception e) {
