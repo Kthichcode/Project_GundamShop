@@ -20,6 +20,8 @@
             <input type="text" name="searchTerm" class="search-input" placeholder="Tìm kiếm...">
             <button class="search-button">🔍</button>
         </form>
+        
+        <a href="productForm.jsp">Create New Product</a>
 
         <div class="filter-container">
             <form action="AdminController" method="GET">

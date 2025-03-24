@@ -15,6 +15,7 @@ public class ProductsDTO {
     private String name;
     private String description;
     private double price;
+    private int category_id;
     private int stock_quantity;
     private String image_url;
 
@@ -30,6 +31,15 @@ public class ProductsDTO {
         this.image_url = image_url;
     }
 
+    public ProductsDTO(String name, String description, double price, int category_id, int stock_quantity, String image_url) {
+        this.name = name;
+        this.description = description;
+        this.price = price;
+        this.category_id = category_id;
+        this.stock_quantity = stock_quantity;
+        this.image_url = image_url;
+    }
+    
     public int getProduct_id() {
         return product_id;
     }
@@ -77,6 +87,15 @@ public class ProductsDTO {
     public void setImage_url(String image_url) {
         this.image_url = image_url;
     }
+
+    public int getCategory_id() {
+        return category_id;
+    }
+
+    public void setCategory_id(int category_id) {
+        this.category_id = category_id;
+    }
+     
 
     @Override
     public String toString() {

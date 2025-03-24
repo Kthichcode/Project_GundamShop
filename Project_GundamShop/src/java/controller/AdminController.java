@@ -7,6 +7,7 @@ package controller;
 
 import dao.ProductDAO;
 import dto.ProductsDTO;
+import java.awt.print.Book;
 import java.io.IOException;
 import java.util.List;
 import javax.servlet.ServletException;
@@ -65,7 +66,7 @@ public class AdminController extends HttpServlet {
 
         return MANAGE_PAGE;
     }
-    
+
     private String processEdit(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         String url = MANAGE_PAGE;
@@ -84,6 +85,30 @@ public class AdminController extends HttpServlet {
         return url;
     }
 
+    private String processCreate(HttpServletRequest request, HttpServletResponse response)
+            throws ServletException, IOException {
+        String url = MANAGE_PAGE;
+        HttpSession session = request.getSession();
+        if (AuthUtils.isAdmin(session)) {        
+            try {
+                String name = request.getParameter("name");
+                String description = request.getParameter("description");
+                double price = Double.parseDouble(request.getParameter("price"));
+                int stock_quantity = Integer.parseInt(request.getParameter("stock_quantity"));
+                int category_id = Integer.parseInt(request.getParameter("category_id"));
+                String image_url = request.getParameter("image_url");
+                
+                ProductsDTO product = new ProductsDTO(name, description, price, category_id, stock_quantity, image_url);
+                pd.create(product);
+                url = "productForm.jsp";
+                request.setAttribute("mess", "Create successful");
+            } catch (Exception e) {
+            }
+                
+        }
+        return url;
+    }
+
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
@@ -93,9 +118,11 @@ public class AdminController extends HttpServlet {
         try {
             if (action == null || action.trim().isEmpty()) {
                 url = processPrintAll(request, response);
-            }else{
-                if(action.equals("search")){
+            } else {
+                if (action.equals("search")) {
                     url = processSearch(request, response);
+                }else if(action.equals("create")){
+                    url = processCreate(request, response);
                 }
             }
         } catch (Exception e) {

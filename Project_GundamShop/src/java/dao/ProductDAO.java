@@ -9,6 +9,7 @@ import dto.ProductsDTO;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
+import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 import utils.DBUtils;
@@ -21,7 +22,25 @@ public class ProductDAO implements IDAO<ProductsDTO, Integer> {
 
     @Override
     public boolean create(ProductsDTO entity) {
-        throw new UnsupportedOperationException("Not supported yet.");
+        String sql = "INSERT INTO Products (name, description, price, stock_quantity, category_id, image_url, created_at, status) "
+                + "VALUES (?, ?, ?, ?, ?, ?, GETDATE(), 1)";
+        try {
+            Connection conn = DBUtils.getConnection();
+            PreparedStatement ps = conn.prepareStatement(sql);
+
+            ps.setString(1, entity.getName());
+            ps.setString(2, entity.getDescription());
+            ps.setDouble(3, entity.getPrice());
+            ps.setInt(4, entity.getStock_quantity());
+            ps.setInt(5, entity.getCategory_id());
+            ps.setString(6, entity.getImage_url());
+            
+            int i = ps.executeUpdate();
+            return i > 0;
+        } catch (ClassNotFoundException | SQLException e) {
+            e.toString();
+        }
+        return false;
     }
 
     @Override
@@ -119,9 +138,9 @@ public class ProductDAO implements IDAO<ProductsDTO, Integer> {
             Connection conn = DBUtils.getConnection();
             PreparedStatement ps = conn.prepareStatement(sql);
             ps.setInt(1, id);
-            ResultSet rs= ps.executeQuery();
-            
-            while(rs.next()){
+            ResultSet rs = ps.executeQuery();
+
+            while (rs.next()) {
                 ProductsDTO p = new ProductsDTO(
                         rs.getInt("product_id"),
                         rs.getString("name"),
@@ -130,9 +149,9 @@ public class ProductDAO implements IDAO<ProductsDTO, Integer> {
                         rs.getInt("stock_quantity"),
                         rs.getString("image_url"));
                 return p;
-            }                   
+            }
         } catch (Exception e) {
-            
+
         }
         return null;
     }
