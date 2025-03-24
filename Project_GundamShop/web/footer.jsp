@@ -132,10 +132,10 @@
         <div class="footer-section">
             <h3>Danh mục sản phẩm</h3>
             <ul class="footer-links">
-                <li><a href="#">HG (High Grade)</a></li>
-                <li><a href="#">MG (Master Grade)</a></li>
-                <li><a href="#">RG (Real Grade)</a></li>
-                <li><a href="#">PG (Perfect Grade)</a></li>
+                <li><a href="ProductController?action=filterCategory&categoryId=3">SD (Super Deformed)</a></li>
+                <li><a href="ProductController?action=filterCategory&categoryId=1">HG (High Grade</a></li>
+                <li><a href="ProductController?action=filterCategory&categoryId=2">MG (Master Grade)</a></li>
+                <li><a href="ProductController?action=filterCategory&categoryId=4">PG (Perfect Grade)</a></li>
                 
             </ul>
         </div>
@@ -157,9 +157,9 @@
                 <button>Đăng ký</button>
             </div>
             <div class="social-links">
-                <a href="#"><i class="fa fa-facebook"></i></a>
-                <a href="#"><i class="fa fa-twitter"></i></a>
-                <a href="#"><i class="fa fa-instagram"></i></a>
+                <a href="https://www.facebook.com/quoc.at.278457"><i class="fa fa-facebook"> </i>  <img src="img/Facebook_Logo_(2019).png" alt="Facebook Logo" width="40" height="40">  </a>
+                <a href="https://www.youtube.com/@LeMing10"><i class="fa fa-twitter"></i>   <img src="img/Youtube1.png" alt="Youtube Logo" width="40" height="40"> </a>
+                <a href="https://www.instagram.com/minbebong_14/"><i class="fa fa-instagram"></i>  <img src="img/instagram_logo_icon_187313.PNG" alt="Instagram Logo" width="40" height="40"> </a>
             </div>
         </div>
     </div>

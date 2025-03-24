@@ -20,7 +20,7 @@
                 <hr>
                 <div>Bạn chưa có tài khoản ?</div>
                 <a href="sign_up.jsp" class="sign_up">Đăng ký</a>
-                <a href="home.jsp" class="home-button">Quay về trang chủ</a>
+                <a href="home.jsp" class="home-button">Quay về trang chủ </a>
             </form>
         </div>
 

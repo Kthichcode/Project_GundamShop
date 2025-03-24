@@ -6,32 +6,14 @@
     <head>
         <meta charset="UTF-8">
         <title>Minh.Đạt Gunpla Shop - Home</title>
+        <!-- CSS riêng cho trang home -->
         <link rel="stylesheet" type="text/css" href="assets/css/home.css">
-        <style>
-            /* Nếu file CSS home.css chưa có style cho phân trang, thêm đoạn sau */
-            .pagination {
-                text-align: center;
-                margin: 20px 0;
-            }
-            .pagination a {
-                display: inline-block;
-                padding: 8px 12px;
-                margin: 0 5px;
-                background: #007bff;
-                color: white;
-                text-decoration: none;
-                border-radius: 4px;
-                transition: background 0.3s;
-            }
-            .pagination a:hover {
-                background: #0056b3;
-            }
-            .pagination a.active {
-                background: #ff9900;
-            }
-        </style>
+
+        <!-- Style bổ sung cho phần phân trang (nếu cần) -->
+        
     </head>
     <body>
+        <!-- Include header -->
         <%@ include file="header.jsp" %>
 
         <!-- Phần Slideshow -->
@@ -48,9 +30,11 @@
             <div class="mySlides">
                 <img src="img/Banner3.jpg" alt="Banner 4">
             </div>
+            <!-- Nút điều khiển -->
             <a class="prev" onclick="plusSlides(-1)">&#10094;</a>
             <a class="next" onclick="plusSlides(1)">&#10095;</a>
         </div>
+        <!-- Dot indicator -->
         <div class="dot-container">
             <span class="dot" onclick="currentSlide(1)"></span>
             <span class="dot" onclick="currentSlide(2)"></span>
@@ -69,6 +53,7 @@
                     <option value="2">MG (Master Grade)</option>
                     <option value="4">PG (Perfect Grade)</option>
                 </select>
+                <!-- Submit form để lọc -->
                 <button type="submit">Lọc</button>
             </form>
         </div>
@@ -91,23 +76,24 @@
 
         <!-- Phần Phân trang -->
         <div class="pagination">
-            <!-- Hiển thị nút "Trang trước" nếu trang hiện tại > 1 -->
+            <!-- Nút "Trang trước" nếu currentPage > 1 -->
             <c:if test="${currentPage > 1}">
                 <a href="ProductController?action=showAll&page=${currentPage - 1}">← Trang trước</a>
             </c:if>
 
-            <!-- Lặp qua số trang từ 1 đến totalPages -->
+            <!-- Vòng lặp số trang từ 1 đến totalPages -->
             <c:forEach var="i" begin="1" end="${totalPages}">
                 <a href="ProductController?action=showAll&page=${i}"
                    class="${i == currentPage ? 'active' : ''}">${i}</a>
             </c:forEach>
 
-            <!-- Hiển thị nút "Trang sau" nếu trang hiện tại < totalPages -->
+            <!-- Nút "Trang sau" nếu currentPage < totalPages -->
             <c:if test="${currentPage < totalPages}">
                 <a href="ProductController?action=showAll&page=${currentPage + 1}">Trang sau →</a>
             </c:if>
         </div>
 
+        <!-- Include footer -->
         <%@ include file="footer.jsp" %>
 
         <!-- JavaScript cho Slideshow -->
@@ -155,6 +141,7 @@
                     dots[i].className = dots[i].className.replace(" active-dot", "");
                 }
                 dots[autoIndex - 1].className += " active-dot";
+                // Tự động chuyển slide sau 3 giây
                 setTimeout(autoSlide, 3000);
             }
         </script>

@@ -33,7 +33,7 @@
                     </div>
                 </li>
                 <li class="menu-item"><a href="CartController?action=view">Giỏ hàng</a></li>
-                <li class="menu-item"><a href="#">Liên hệ</a></li>
+                <li class="menu-item"><a href="https://www.youtube.com/@LeMing10/videos">Liên hệ</a></li>
             </ul>
 
             <div class="search-bar">
