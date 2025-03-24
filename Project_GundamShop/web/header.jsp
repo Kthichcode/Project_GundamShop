@@ -47,7 +47,7 @@
             <!-- Đảm bảo user-menu nằm trong nav -->
             <div class="user-menu">
                 <button class="user-icon">
-                    <img src="icon/user.png" alt="User Icon">
+                    <img src="icon/user3.png" alt="User Icon">
                 </button>
                 <div class="dropdown-menu">
                     <a href="login.jsp">Đăng nhập</a>

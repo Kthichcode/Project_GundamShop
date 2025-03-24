@@ -27,7 +27,6 @@ public class CartController extends HttpServlet {
             action = "view";
         }
         
-        // Nếu chưa đăng nhập: dùng session để lưu giỏ hàng (guest mode)
         if (userId == null) {
             @SuppressWarnings("unchecked")
             List<CartDTO> sessionCart = (List<CartDTO>) session.getAttribute("SESSION_CART");
@@ -39,7 +38,6 @@ public class CartController extends HttpServlet {
             if ("add".equals(action)) {
                 int productId = Integer.parseInt(request.getParameter("productId"));
                 int quantity = Integer.parseInt(request.getParameter("quantity"));
-                // Lấy thông tin sản phẩm
                 ProductsDTO product = productDAO.readById(productId);
                 
                 if (product != null) {
@@ -81,38 +79,7 @@ public class CartController extends HttpServlet {
             } else {
                 response.sendRedirect("CartController?action=view");
             }           
-        }
-        // Nếu đã đăng nhập: lưu giỏ hàng vào DB (logged-in mode)
-        else {
-            if ("add".equals(action)) {
-                int productId = Integer.parseInt(request.getParameter("productId"));
-                int quantity = Integer.parseInt(request.getParameter("quantity"));
-                ProductsDTO product = productDAO.readById(productId);
-                if (product != null) {
-                    cartDAO.addOrUpdateCart(userId, productId, quantity);
-                }
-                request.setAttribute("product", product);
-                response.sendRedirect("CartController?action=view");
-            } else if ("view".equals(action)) {
-                List<CartDTO> cartItems = cartDAO.getCartByUser(userId);
-                request.setAttribute("CART_ITEMS", cartItems);
-                request.getRequestDispatcher("cart.jsp").forward(request, response);
-            } else if ("update".equals(action)) {
-                int productId = Integer.parseInt(request.getParameter("productId"));
-                int newQuantity = Integer.parseInt(request.getParameter("newQuantity"));
-                cartDAO.updateQuantityByProduct(userId, productId, newQuantity);
-                response.sendRedirect("CartController?action=view");
-            } else if ("remove".equals(action)) {
-                int productId = Integer.parseInt(request.getParameter("productId"));
-                cartDAO.removeCartItem(userId, productId);
-                response.sendRedirect("CartController?action=view");
-            } else if ("clear".equals(action)) {
-                cartDAO.clearCart(userId);
-                response.sendRedirect("CartController?action=view");
-            } else {
-                response.sendRedirect("CartController?action=view");
-            }
-        }
+        }       
     }
 
     @Override
