@@ -14,7 +14,7 @@
 
         <div class="slideshow-container">
             <div class="mySlides">
-                <img src="img/Ahihi.jpg" alt="Banner 1">
+                <img src="img/banner4.jpg" alt="Banner 1">
             </div>
             <div class="mySlides">
                 <img src="img/Banner1.jpg" alt="Banner 2">
