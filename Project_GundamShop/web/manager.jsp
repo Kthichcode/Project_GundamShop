@@ -61,15 +61,20 @@
                                 <fmt:formatNumber value="${p.price}" pattern="#,##0" />đ
                             </p>
                         </td>
-        <td>${p.description}</td>
-        <td>${p.stock_quantity}</td>
-        <td>Test</td>
-    </tr>
-</c:forEach>
-</tbody>
-</table>
+                        <td>${p.description}</td>
+                        <td>${p.stock_quantity}</td>
+                        <td>
+                            <a href="AdminController?action=edit&id=${p.product_id}">Edit</a>
+                        </td>
+                        <td>
+                            <a href="#">Delete</a>
+                        </td>                       
+                    </tr>
+                </c:forEach>
+            </tbody>
+        </table>
 
 
 
-</body>
+    </body>
 </html>

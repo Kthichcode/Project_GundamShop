@@ -8,7 +8,6 @@ package controller;
 import dao.ProductDAO;
 import dto.ProductsDTO;
 import java.io.IOException;
-import java.io.PrintWriter;
 import java.util.List;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -65,6 +64,24 @@ public class AdminController extends HttpServlet {
         request.setAttribute("searchTerm", searchTerm);
 
         return MANAGE_PAGE;
+    }
+    
+    private String processEdit(HttpServletRequest request, HttpServletResponse response)
+            throws ServletException, IOException {
+        String url = MANAGE_PAGE;
+        HttpSession session = request.getSession();
+        if (AuthUtils.isAdmin(session)) {
+            int id = Integer.parseInt(request.getParameter("id"));
+            ProductsDTO product = pd.readById(id);
+            if (product != null) {
+                request.setAttribute("product", product);
+                request.setAttribute("action", "update");
+                url = "manager.jsp";
+            } else {
+                url = processSearch(request, response);
+            }
+        }
+        return url;
     }
 
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
