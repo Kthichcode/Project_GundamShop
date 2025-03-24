@@ -29,17 +29,42 @@ public class ProductController extends HttpServlet {
     public String processPrintAll(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         String url = HOME_PAGE;
+        // Lấy tham số categoryId nếu có (để lọc theo category)
         String categoryIdStr = request.getParameter("categoryId");
-        List<ProductsDTO> list;
 
-        if (categoryIdStr == null || categoryIdStr.trim().isEmpty()) {
-            list = pd.readAll();
-        } else {
-            int categoryId = Integer.parseInt(categoryIdStr);
-            list = pd.readByCategory(categoryId);
+        // Lấy tham số "page" từ request, mặc định là 1
+        int page = 1;
+        int pageSize = 12; // 12 sản phẩm mỗi trang
+        String pageStr = request.getParameter("page");
+        if (pageStr != null && !pageStr.trim().isEmpty()) {
+            try {
+                page = Integer.parseInt(pageStr);
+            } catch (NumberFormatException ex) {
+                page = 1;
+            }
         }
 
+        List<ProductsDTO> list;
+        int totalProducts;
+        if (categoryIdStr == null || categoryIdStr.trim().isEmpty()) {
+            // Lấy sản phẩm không lọc theo category
+            list = pd.getProductsByPage(page, pageSize);
+            totalProducts = pd.getTotalProducts();
+        } else {
+            // Nếu có category, bạn cần implement phương thức phân trang cho category
+            // Ví dụ: pd.getProductsByCategoryPage(categoryId, page, pageSize)
+            // Và pd.getTotalProductsByCategory(categoryId)
+            int categoryId = Integer.parseInt(categoryIdStr);
+            list = pd.getProductsByCategoryPage(categoryId, page, pageSize);
+            totalProducts = pd.getTotalProductsByCategory(categoryId);
+        }
+
+        int totalPages = (int) Math.ceil((double) totalProducts / pageSize);
+        // Đặt danh sách sản phẩm và thông tin phân trang vào request
         request.setAttribute("list", list);
+        request.setAttribute("currentPage", page);
+        request.setAttribute("totalPages", totalPages);
+
         return url;
     }
 

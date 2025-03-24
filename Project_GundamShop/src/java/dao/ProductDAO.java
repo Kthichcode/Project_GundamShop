@@ -34,7 +34,7 @@ public class ProductDAO implements IDAO<ProductsDTO, Integer> {
             ps.setInt(4, entity.getStock_quantity());
             ps.setInt(5, entity.getCategory_id());
             ps.setString(6, entity.getImage_url());
-            
+
             int i = ps.executeUpdate();
             return i > 0;
         } catch (ClassNotFoundException | SQLException e) {
@@ -160,5 +160,95 @@ public class ProductDAO implements IDAO<ProductsDTO, Integer> {
     public boolean delete(Integer id) {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
+
+    public List<ProductsDTO> getProductsByPage(int page, int pageSize) {
+        List<ProductsDTO> products = new ArrayList<>();
+        // Tính vị trí bắt đầu: (page - 1) * pageSize
+        int offset = (page - 1) * pageSize;
+        // Câu lệnh SQL sử dụng cú pháp OFFSET ... FETCH NEXT
+        String sql = "SELECT * FROM Products ORDER BY product_id OFFSET ? ROWS FETCH NEXT ? ROWS ONLY";
+        try (Connection conn = DBUtils.getConnection();
+                PreparedStatement ps = conn.prepareStatement(sql)) {
+            ps.setInt(1, offset);
+            ps.setInt(2, pageSize);
+            ResultSet rs = ps.executeQuery();
+            while (rs.next()) {
+                ProductsDTO product = new ProductsDTO(
+                        rs.getInt("product_id"),
+                        rs.getString("name"),
+                        rs.getString("description"),
+                        rs.getDouble("price"),
+                        rs.getInt("stock_quantity"),
+                        rs.getString("image_url")
+                );
+                products.add(product);
+            }
+        } catch (SQLException | ClassNotFoundException ex) {
+            ex.printStackTrace();
+        }
+        return products;
+    }
+
+    // Phương thức đếm tổng số sản phẩm
+    public int getTotalProducts() {
+        String sql = "SELECT COUNT(*) FROM Products";
+        try (Connection conn = DBUtils.getConnection();
+                PreparedStatement ps = conn.prepareStatement(sql);
+                ResultSet rs = ps.executeQuery()) {
+            if (rs.next()) {
+                return rs.getInt(1);
+            }
+        } catch (SQLException | ClassNotFoundException ex) {
+            ex.printStackTrace();
+        }
+        return 0;
+    }
+
+    public List<ProductsDTO> getProductsByCategoryPage(int categoryId, int page, int pageSize) {
+        List<ProductsDTO> products = new ArrayList<>();
+        // Tính toán vị trí bắt đầu dựa trên số trang
+        int offset = (page - 1) * pageSize;
+        // Câu lệnh SQL: lọc theo category, sắp xếp theo product_id,
+        // và sử dụng OFFSET – FETCH để phân trang
+        String sql = "SELECT * FROM Products WHERE category_id = ? ORDER BY product_id OFFSET ? ROWS FETCH NEXT ? ROWS ONLY";
+
+        try (Connection conn = DBUtils.getConnection();
+                PreparedStatement ps = conn.prepareStatement(sql)) {
+            ps.setInt(1, categoryId);
+            ps.setInt(2, offset);
+            ps.setInt(3, pageSize);
+            ResultSet rs = ps.executeQuery();
+            while (rs.next()) {
+                ProductsDTO product = new ProductsDTO(
+                        rs.getInt("product_id"),
+                        rs.getString("name"),
+                        rs.getString("description"),
+                        rs.getDouble("price"),
+                        rs.getInt("stock_quantity"),
+                        rs.getString("image_url")
+                );
+                products.add(product);
+            }
+        } catch (SQLException | ClassNotFoundException ex) {
+            ex.printStackTrace();
+        }
+        return products;
+    }
+    
+    public int getTotalProductsByCategory(int categoryId) {
+    String sql = "SELECT COUNT(*) FROM Products WHERE category_id = ?";
+    try (Connection conn = DBUtils.getConnection();
+         PreparedStatement ps = conn.prepareStatement(sql)) {
+        ps.setInt(1, categoryId);
+        ResultSet rs = ps.executeQuery();
+        if (rs.next()) {
+            return rs.getInt(1);
+        }
+    } catch (SQLException | ClassNotFoundException ex) {
+        ex.printStackTrace();
+    }
+    return 0;
+}
+
 
 }

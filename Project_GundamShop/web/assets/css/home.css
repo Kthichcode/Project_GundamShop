@@ -151,3 +151,25 @@ body {
     padding: 2px 5px;
     border-radius: 3px;
 }
+
+
+.pagination {
+    text-align: center;
+    margin: 20px 0;
+}
+.pagination a {
+    display: inline-block;
+    padding: 8px 12px;
+    margin: 0 5px;
+    background: #007bff;
+    color: white;
+    text-decoration: none;
+    border-radius: 4px;
+    transition: background 0.3s;
+}
+.pagination a:hover {
+    background: #0056b3;
+}
+.pagination a.active {
+    background: #ff9900;
+}
