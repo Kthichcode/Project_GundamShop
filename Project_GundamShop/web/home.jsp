@@ -9,8 +9,7 @@
         <!-- CSS riêng cho trang home -->
         <link rel="stylesheet" type="text/css" href="assets/css/home.css">
 
-        <!-- Style bổ sung cho phần phân trang (nếu cần) -->
-        
+        <!-- Style bổ sung cho phần phân trang (nếu cần) -->       
     </head>
     <body>
         <!-- Include header -->
@@ -113,8 +112,12 @@
                 let i;
                 let slides = document.getElementsByClassName("mySlides");
                 let dots = document.getElementsByClassName("dot");
-                if (n > slides.length) { slideIndex = 1; }
-                if (n < 1) { slideIndex = slides.length; }
+                if (n > slides.length) {
+                    slideIndex = 1;
+                }
+                if (n < 1) {
+                    slideIndex = slides.length;
+                }
                 for (i = 0; i < slides.length; i++) {
                     slides[i].style.display = "none";
                 }
@@ -135,7 +138,9 @@
                     slides[i].style.display = "none";
                 }
                 autoIndex++;
-                if (autoIndex > slides.length) { autoIndex = 1; }
+                if (autoIndex > slides.length) {
+                    autoIndex = 1;
+                }
                 slides[autoIndex - 1].style.display = "block";
                 for (i = 0; i < dots.length; i++) {
                     dots[i].className = dots[i].className.replace(" active-dot", "");
@@ -146,4 +151,27 @@
             }
         </script>
     </body>
+
+    <style>
+        .pagination {
+            text-align: center;
+            margin: 20px 0;
+        }
+        .pagination a {
+            display: inline-block;
+            padding: 8px 12px;
+            margin: 0 5px;
+            background: #007bff;
+            color: white;
+            text-decoration: none;
+            border-radius: 4px;
+            transition: background 0.3s;
+        }
+        .pagination a:hover {
+            background: #0056b3;
+        }
+        .pagination a.active {
+            background: #ff9900;
+        }
+    </style>
 </html>

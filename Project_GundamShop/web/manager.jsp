@@ -55,7 +55,7 @@
                     <tr>
                         <td>${p.product_id}</td>
                         <td>
-                            <img src="img/${p.image_url}" alt="${p.name}" width="100">
+                            <img src="${p.image_url}" alt="${p.name}" width="100">
                         </td>
                         <td>${p.name}</td>
                         <td>
