@@ -57,7 +57,6 @@ public class UserController extends HttpServlet {
             session.setAttribute("user", user);
             session.setAttribute("mess", "Hello" + " " + userName + "!");
             url = "ProductController?action=showAll";
-
         } else {
             request.setAttribute("mess", "Invalid username or password");
             url = "login.jsp";

@@ -8,6 +8,7 @@ package controller;
 import dao.ProductDAO;
 import dto.ProductsDTO;
 import java.io.IOException;
+import java.io.PrintWriter;
 import java.util.List;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -17,18 +18,19 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import utils.AuthUtils;
 
-@WebServlet(name = "ProductController", urlPatterns = {"/ProductController"})
-public class ProductController extends HttpServlet {
+/**
+ *
+ * @author tamph
+ */
+@WebServlet(name = "AdminController", urlPatterns = {"/AdminController"})
+public class AdminController extends HttpServlet {
 
-    private static final String LOGIN_PAGE = "login.jsp";
-    private static final String SIGN_UP_PAGE = "sign_up.jsp";
-    private static final String HOME_PAGE = "home.jsp";
-
+    private static final String MANAGE_PAGE = "manager.jsp";
     private ProductDAO pd = new ProductDAO();
 
     public String processPrintAll(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        String url = HOME_PAGE;
+        String url = MANAGE_PAGE;
         String categoryIdStr = request.getParameter("categoryId");
         List<ProductsDTO> list;
 
@@ -48,7 +50,7 @@ public class ProductController extends HttpServlet {
         HttpSession session = request.getSession();
 
         if (!AuthUtils.isLoggedIn(session)) {
-            return LOGIN_PAGE;
+            return MANAGE_PAGE;
         }
 
         String searchTerm = request.getParameter("searchTerm");
@@ -62,38 +64,22 @@ public class ProductController extends HttpServlet {
 
         request.setAttribute("searchTerm", searchTerm);
 
-        return HOME_PAGE;
-    }
-
-    public String processDetail(HttpServletRequest request, HttpServletResponse response)
-            throws ServletException, IOException {
-        HttpSession session = request.getSession();
-        String url = HOME_PAGE;
-
-        int id = Integer.parseInt(request.getParameter("id"));
-        ProductsDTO product = pd.readById(id);
-        request.setAttribute("product", product);
-        url = "productDetail.jsp";
-
-        return url;
+        return MANAGE_PAGE;
     }
 
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
-
         String action = request.getParameter("action");
-        String url = HOME_PAGE;
+        String url = MANAGE_PAGE;
 
         try {
             if (action == null || action.trim().isEmpty()) {
                 url = processPrintAll(request, response);
-            } else if ("search".equals(action)) {
-                url = processSearch(request, response);
-            } else if (action.equals("detail")) {
-                url = processDetail(request, response);
-            } else {
-                url = processPrintAll(request, response);
+            }else{
+                if(action.equals("search")){
+                    url = processSearch(request, response);
+                }
             }
         } catch (Exception e) {
             e.printStackTrace();

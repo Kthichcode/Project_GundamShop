@@ -20,7 +20,6 @@
             <h1>THÔNG TIN TÀI KHOẢN</h1>
             <p><strong>Tên đăng nhập:</strong> ${sessionScope.user.userName}</p>
             <p><strong>Email:</strong> ${sessionScope.user.email}</p>
-            <p><strong>Mật khẩu:</strong> ${sessionScope.user.password}</p>
             <!-- Nút Quay lại trang chủ -->
             <a href="home.jsp" class="btn-home">Quay lại trang chủ</a>
         </c:if>

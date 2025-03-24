@@ -21,7 +21,6 @@ public class CartController extends HttpServlet {
             throws ServletException, IOException {
 
         HttpSession session = request.getSession();
-        // Kiểm tra xem người dùng đã đăng nhập hay chưa
         Integer userId = (Integer) session.getAttribute("user_id");
         String action = request.getParameter("action");
         if (action == null) {
