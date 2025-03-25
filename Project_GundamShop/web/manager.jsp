@@ -12,6 +12,7 @@
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
         <title>JSP Page</title>
+        <link rel="stylesheet" type="text/css" href="assets/css/manager.css">
     </head>
     <body>
         <c:set var="searchTerm" value="${requestScope.searchTerm==null?'':requestScope.searchTerm}" />
@@ -46,7 +47,9 @@
                     <th>Name</th>
                     <th>Price</th>
                     <th>Description</th>
+                    <th>Category_ID</th>
                     <th>Quantity</th>
+                    <th>Status</th>
                     <th>Action</th>
                 </tr>
             </thead>
@@ -64,12 +67,14 @@
                             </p>
                         </td>
                         <td>${p.description}</td>
+                        <td>${p.category_id}</td>
                         <td>${p.stock_quantity}</td>
+                        <td>${p.status}</td>
                         <td>
                             <a href="AdminController?action=edit&id=${p.product_id}">Edit</a>
                         </td>
                         <td>
-                            <a href="#">Delete</a>
+                            <a href="AdminController?action=delete&id=${p.product_id}">Delete</a>
                         </td>                       
                     </tr>
                 </c:forEach>

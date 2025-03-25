@@ -1,0 +1,205 @@
+/*
+To change this license header, choose License Headers in Project Properties.
+To change this template file, choose Tools | Templates
+and open the template in the editor.
+*/
+/* 
+    Created on : Mar 25, 2025, 8:56:46 AM
+    Author     : tamph
+*/
+
+/* Reset default styles */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: 'Segoe UI', Arial, sans-serif;
+    background-color: #f5f6fa;
+    padding: 20px;
+    color: #333;
+}
+
+/* Search Form Styling */
+form {
+    margin-bottom: 20px;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.search-input {
+    padding: 10px 15px;
+    width: 300px;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+    font-size: 14px;
+    transition: border-color 0.3s;
+}
+
+.search-input:focus {
+    outline: none;
+    border-color: #4e73df;
+}
+
+.search-button {
+    padding: 10px 15px;
+    background-color: #4e73df;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s;
+}
+
+.search-button:hover {
+    background-color: #3758c9;
+}
+
+/* Create New Product Link */
+a[href="productForm.jsp"] {
+    display: inline-block;
+    padding: 10px 20px;
+    background-color: #1cc88a;
+    color: white;
+    text-decoration: none;
+    border-radius: 5px;
+    margin-bottom: 20px;
+    transition: background-color 0.3s;
+}
+
+a[href="productForm.jsp"]:hover {
+    background-color: #17a673;
+}
+
+/* Filter Container */
+.filter-container {
+    margin-bottom: 20px;
+    background-color: white;
+    padding: 15px;
+    border-radius: 5px;
+    box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+}
+
+.filter-container form {
+    display: flex;
+    align-items: center;
+    gap: 15px;
+}
+
+.filter-container label {
+    font-weight: 500;
+}
+
+.filter-container select {
+    padding: 8px 12px;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+    font-size: 14px;
+}
+
+.filter-container button {
+    padding: 8px 15px;
+    background-color: #4e73df;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s;
+}
+
+.filter-container button:hover {
+    background-color: #3758c9;
+}
+
+/* Table Styling */
+table {
+    width: 100%;
+    border-collapse: collapse;
+    background-color: white;
+    box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+    border-radius: 5px;
+    overflow: hidden;
+}
+
+th, td {
+    padding: 12px 15px;
+    text-align: left;
+    border-bottom: 1px solid #eee;
+}
+
+th {
+    background-color: #4e73df;
+    color: white;
+    font-weight: 600;
+}
+
+tr:nth-child(even) {
+    background-color: #f8f9fc;
+}
+
+tr:hover {
+    background-color: #f1f3f9;
+}
+
+/* Image Styling */
+td img {
+    max-width: 100px;
+    height: auto;
+    border-radius: 5px;
+    object-fit: cover;
+}
+
+/* Price Styling */
+.price {
+    color: #e74a3b;
+    font-weight: 500;
+}
+
+/* Action Links */
+td a {
+    padding: 6px 12px;
+    text-decoration: none;
+    border-radius: 4px;
+    margin-right: 5px;
+    font-size: 13px;
+}
+
+td a[href*="edit"] {
+    background-color: #36b9cc;
+    color: white;
+}
+
+td a[href*="edit"]:hover {
+    background-color: #2c9faf;
+}
+
+td a[href*="delete"] {
+    background-color: #e74a3b;
+    color: white;
+}
+
+td a[href*="delete"]:hover {
+    background-color: #c6392c;
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+    .search-input {
+        width: 200px;
+    }
+
+    table {
+        font-size: 14px;
+    }
+
+    th, td {
+        padding: 8px 10px;
+    }
+
+    td img {
+        max-width: 80px;
+    }
+}

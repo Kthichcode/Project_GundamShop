@@ -12,6 +12,8 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import utils.DBUtils;
 
 /**
@@ -286,6 +288,24 @@ public class ProductDAO implements IDAO<ProductsDTO, Integer> {
             ex.printStackTrace();
         }
         return 0;
+    }
+    
+    public boolean setStatusToZero(int productId){
+        String sql = "UPDATE Products SET status = 0 WHERE product_id = ?";
+        try{
+            Connection conn = DBUtils.getConnection();
+            PreparedStatement ps = conn.prepareStatement(sql);
+
+            ps.setInt(1, productId);
+            int i = ps.executeUpdate();
+
+            return i > 0;
+        } catch (SQLException e) {
+            e.printStackTrace();
+        } catch (ClassNotFoundException ex) {
+            Logger.getLogger(ProductDAO.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return false;
     }
 
 }

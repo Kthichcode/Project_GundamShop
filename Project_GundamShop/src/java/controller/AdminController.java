@@ -94,20 +94,35 @@ public class AdminController extends HttpServlet {
         String url = MANAGE_PAGE;
         HttpSession session = request.getSession();
         if (AuthUtils.isAdmin(session)) {
-            try {              
+            try {
                 String name = request.getParameter("name");
                 String description = request.getParameter("description");
                 double price = Double.parseDouble(request.getParameter("price"));
                 int stock_quantity = Integer.parseInt(request.getParameter("stock_quantity"));
                 int category_id = Integer.parseInt(request.getParameter("category_id"));
                 String image_url = request.getParameter("image_url");
-                
+
                 ProductsDTO product = new ProductsDTO(name, description, price, category_id, stock_quantity, image_url);
                 pd.create(product);
                 url = "productForm.jsp";
                 request.setAttribute("mess", "Create successful");
             } catch (Exception e) {
             }
+
+        }
+        return url;
+    }
+
+    private String processDelete(HttpServletRequest request, HttpServletResponse response)
+            throws ServletException, IOException {
+        String url = MANAGE_PAGE;
+        HttpSession session = request.getSession();
+        if (AuthUtils.isAdmin(session)) {
+            int id = Integer.parseInt(request.getParameter("id"));
+            pd.setStatusToZero(id);
+
+            url = processSearch(request, response);
+            processSearch(request, response);
 
         }
         return url;
@@ -127,7 +142,7 @@ public class AdminController extends HttpServlet {
                 int category_id = Integer.parseInt(request.getParameter("category_id"));
                 String image_url = request.getParameter("image_url");
                 boolean status = Boolean.parseBoolean(request.getParameter("status"));
-                
+
                 ProductsDTO product = new ProductsDTO(product_id, name, description, price, category_id, stock_quantity, image_url, status);
                 pd.update(product);
                 List<CategoryDTO> listC = cd.readAll();
@@ -159,6 +174,8 @@ public class AdminController extends HttpServlet {
                     url = processEdit(request, response);
                 } else if (action.equals("update")) {
                     url = processUpdate(request, response);
+                }else if (action.equals("delete")) {
+                    url = processDelete(request, response);
                 }
             }
         } catch (Exception e) {

@@ -60,7 +60,7 @@
                 </div>
             </div>
 
-            <c:if test="${not empty mess}">
+            <c:if test="${isLoggedIn}">
                 <span class="greeting">${mess}</span>
             </c:if>
         </nav>  
