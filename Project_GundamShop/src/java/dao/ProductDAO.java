@@ -47,7 +47,7 @@ public class ProductDAO implements IDAO<ProductsDTO, Integer> {
 
     @Override
     public List<ProductsDTO> readAll() {
-        String sql = "SELECT * FROM Products";
+        String sql = "SELECT * FROM Products WHERE stock_quantity > 0 AND status = 1";
         List<ProductsDTO> list = new ArrayList<ProductsDTO>();
         try {
             Connection conn = DBUtils.getConnection();
@@ -232,7 +232,7 @@ public class ProductDAO implements IDAO<ProductsDTO, Integer> {
         // Tính vị trí bắt đầu: (page - 1) * pageSize
         int offset = (page - 1) * pageSize;
         // Câu lệnh SQL sử dụng cú pháp OFFSET ... FETCH NEXT
-        String sql = "SELECT * FROM Products ORDER BY product_id OFFSET ? ROWS FETCH NEXT ? ROWS ONLY";
+        String sql = "SELECT * FROM Products WHERE stock_quantity > 0 AND status = 1 ORDER BY product_id OFFSET ? ROWS FETCH NEXT ? ROWS ONLY";
         try (Connection conn = DBUtils.getConnection();
                 PreparedStatement ps = conn.prepareStatement(sql)) {
             ps.setInt(1, offset);
@@ -259,7 +259,7 @@ public class ProductDAO implements IDAO<ProductsDTO, Integer> {
 
     // Phương thức đếm tổng số sản phẩm
     public int getTotalProducts() {
-        String sql = "SELECT COUNT(*) FROM Products";
+        String sql = "SELECT COUNT(*) FROM Products WHERE stock_quantity > 0 AND status = 1";
         try (Connection conn = DBUtils.getConnection();
                 PreparedStatement ps = conn.prepareStatement(sql);
                 ResultSet rs = ps.executeQuery()) {
@@ -306,7 +306,7 @@ public class ProductDAO implements IDAO<ProductsDTO, Integer> {
     }
 
     public int getTotalProductsByCategory(int categoryId) {
-        String sql = "SELECT COUNT(*) FROM Products WHERE category_id = ?";
+        String sql = "SELECT COUNT(*) FROM Products WHERE category_id = ? AND stock_quantity > 0 AND status = 1";
         try (Connection conn = DBUtils.getConnection();
                 PreparedStatement ps = conn.prepareStatement(sql)) {
             ps.setInt(1, categoryId);
