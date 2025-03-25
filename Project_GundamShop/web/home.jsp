@@ -63,7 +63,7 @@
             <c:forEach var="p" items="${list}">
                 <a href="ProductController?action=detail&id=${p.product_id}" class="product-link">
                     <div class="product-card">
-                        <img src="img/${p.image_url}" alt="${p.name}">
+                        <img src="${p.image_url}" alt="${p.name}">
                         <h3>${p.name}</h3>
                         <p class="price">
                             <fmt:formatNumber value="${p.price}" pattern="#,##0" /> đ
