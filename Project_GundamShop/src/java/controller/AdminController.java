@@ -61,7 +61,7 @@ public class AdminController extends HttpServlet {
             searchTerm = "";
         }
 
-        List<ProductsDTO> products = pd.searchByTitle(searchTerm);
+        List<ProductsDTO> products = pd.searchByTitleForAD(searchTerm);
 
         request.setAttribute("list", products);
 

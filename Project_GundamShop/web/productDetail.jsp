@@ -24,7 +24,7 @@
         <div class="container">
             <div class="left">
                 <div class="main-image">
-                    <img id="mainImg" src="img/${p.image_url}" alt="Mô hình lắp ráp">
+                    <img id="mainImg" src="${p.image_url}" alt="Mô hình lắp ráp">
                 </div>
             </div>
             <div class="right">

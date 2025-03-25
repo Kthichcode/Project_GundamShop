@@ -111,7 +111,37 @@ public class ProductDAO implements IDAO<ProductsDTO, Integer> {
 
     public List<ProductsDTO> searchByTitle(String searchTerm) {
 
-        String sql = "SELECT * FROM Products WHERE name LIKE ? AND stock_quantity > 0";
+        String sql = "SELECT * FROM Products WHERE name LIKE ? AND stock_quantity > 0 AND status = 1";
+        List<ProductsDTO> list = new ArrayList<ProductsDTO>();
+
+        try {
+            Connection conn = DBUtils.getConnection();
+            PreparedStatement ps = conn.prepareStatement(sql);
+            ps.setString(1, "%" + searchTerm + "%");
+            ResultSet rs = ps.executeQuery();
+            while (rs.next()) {
+                ProductsDTO product = new ProductsDTO(
+                        rs.getInt("product_id"),
+                        rs.getString("name"),
+                        rs.getString("description"),
+                        rs.getDouble("price"),
+                        rs.getInt("category_id"),
+                        rs.getInt("stock_quantity"),
+                        rs.getString("image_url"),
+                        rs.getBoolean("status")
+                );
+
+                list.add(product);
+            }
+        } catch (Exception e) {
+            System.out.println(e.toString());
+        }
+        return list;
+    }
+    
+    public List<ProductsDTO> searchByTitleForAD(String searchTerm) {
+
+        String sql = "SELECT * FROM Products WHERE name LIKE ?";
         List<ProductsDTO> list = new ArrayList<ProductsDTO>();
 
         try {
@@ -142,7 +172,7 @@ public class ProductDAO implements IDAO<ProductsDTO, Integer> {
     public List<ProductsDTO> readByCategory(int catID) {
         List<ProductsDTO> list = new ArrayList<>();
         String sql = "SELECT product_id, name, description, price, stock_quantity, image_url "
-                + "FROM Products WHERE category_id = ?";
+                + "FROM Products WHERE category_id = ? AND stock_quantity > 0 AND status = 1";
         try (Connection conn = DBUtils.getConnection();
                 PreparedStatement ps = conn.prepareStatement(sql)) {
             ps.setInt(1, catID);
@@ -166,7 +196,7 @@ public class ProductDAO implements IDAO<ProductsDTO, Integer> {
 
     @Override
     public ProductsDTO readById(Integer id) {
-        String sql = "SELECT * FROM Products WHERE product_id = ?";
+        String sql = "SELECT * FROM Products WHERE product_id = ? AND stock_quantity > 0 AND status = 1";
         try {
             Connection conn = DBUtils.getConnection();
             PreparedStatement ps = conn.prepareStatement(sql);

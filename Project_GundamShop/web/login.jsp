@@ -1,5 +1,4 @@
 
-
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <!DOCTYPE html>
@@ -10,7 +9,7 @@
     </head>   
     <body>
         <div class="login-container">
-            <h3 style="color: green"><c:out value="${requestScope.mess}"></c:out></h3>
+            <h3 style="color: red"><c:out value="${requestScope.mess}"></c:out></h3>
             <h2>ĐĂNG NHẬP</h2>
             <form id="login_form" action="UserController" method="POST">
                 <input type="hidden" name="action" value="login">

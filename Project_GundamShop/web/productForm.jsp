@@ -4,6 +4,7 @@
     Author     : tamph
 --%>
 
+<%@page import="utils.AuthUtils"%>
 <%@page import="dto.ProductsDTO"%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
@@ -12,7 +13,7 @@
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
         <title>Product Management Form</title>
-        <link rel="stylesheet" href="assets/css/productForm.css">
+        <link rel="stylesheet" href="assets/css/productFormV2.css">
     </head>
     <body>
         <%
@@ -27,85 +28,99 @@
                 action = "create";
             }
         %>
+        <c:set var="isLoggedIn" value="<%=AuthUtils.isLoggedIn(session)%>"/>
+        <c:set var="isAdmin" value="<%=AuthUtils.isAdmin(session)%>"/>
 
-        <div class="form-container">
-            <form action="AdminController" method="post" id="productForm" enctype="multipart/form-data">
-                <input type="hidden" name="action" value="<%=action%>"/>
-
-                <c:if test="${action == 'update'}">
-                    <div class="form-field">
-                        <label for="productId">Product ID</label>
-                        <input type="text" id="productId" name="product_id" value="${product.product_id}" readonly>
-                    </div>
-                </c:if>
-
-                <div class="form-field">
-                    <label for="productName">Product Name</label>
-                    <input type="text" id="productName" name="name" value="${product.name}">
-                </div>
-
-                <div class="form-field">
-                    <label for="description">Description</label>
-                    <input type="text" id="description" name="description" value="${product.description}">
-                </div>
-
-                <div class="form-field">
-                    <label for="price">Price</label>
-                    <input type="text" id="price" name="price" value="${product.price}">
-                </div>
-
-                <div class="form-field">
-                    <label for="quantity">Quantity</label>
-                    <input type="number" id="quantity" name="stock_quantity" value="${product.stock_quantity}">
-                </div>
-
-                <div class="form-field">
-                    <label for="category">Category</label>
-                    <input type="text" id="category" name="category_id" value="${product.category_id}">
-                </div>
-
-                <c:if test="${action == 'update'}">
-                    <div class="form-field">
-                        <label for="status">Status</label>
-                        <input type="text" id="status" name="status" value="${product.status}">
-                    </div>
-                </c:if>
-
-                <div class="form-field image-upload-section">
-                    <label for="txtImage">Product Image</label>
-                    <input type="hidden" id="txtImage" name="image_url" value="${product.image_url}">
-                    <div class="upload-container">
-                        <div class="file-upload-wrapper">
-                            <button type="button" class="file-upload-button">Choose Image</button>
-                            <input type="file" id="imageUpload" class="file-upload-input" accept="image/*">
+        <c:if test="${isAdmin}">
+            <div class="form-container">
+                <form action="AdminController" method="post" id="productForm" enctype="multipart/form-data">
+                    <input type="hidden" name="action" value="<%=action%>"/>
+                    
+                    <c:if test="${action == 'update'}">
+                        <div class="form-field">
+                            <label for="productId">Product ID</label>
+                            <input type="text" id="productId" name="product_id" value="${product.product_id}" readonly>
                         </div>
-                        <div class="file-info" id="fileInfo">No file selected</div>
-                        <div class="progress-bar-container" id="progressContainer">
-                            <div class="progress-bar" id="progressBar"></div>
-                        </div>
-                    </div>
-                    <c:if test="${not empty requestScope.txtImage_error}">
-                        <div class="error-message">${requestScope.txtImage_error}</div>
                     </c:if>
-                    <div class="image-preview" id="imagePreview">
-                        <c:if test="${not empty product.image_url}">
-                            <img src="${product.image_url}" alt="Product Preview">
-                        </c:if>
+
+                    <div class="form-field">
+                        <label for="productName">Product Name</label>
+                        <input type="text" id="productName" name="name" value="${product.name}" required>
                     </div>
-                </div>
 
-                <div class="form-actions">
-                    <input type="submit" value="Save" class="submit-btn">
-                    <input type="reset" value="Reset" class="reset-btn" id="resetBtn">
-                </div>
+                    <div class="form-field">
+                        <label for="description">Description</label>
+                        <input type="text" id="description" name="description" value="${product.description}" required>
+                    </div>
 
-                <c:if test="${not empty requestScope.mess}">
-                    <div class="form-message">${requestScope.mess}</div>
-                </c:if>
-            </form>
+                    <div class="form-field">
+                        <label for="price">Price</label>
+                        <input type="text" id="price" name="price" value="${product.price}">
+                    </div>
 
-            <a href="AdminController?action=search" class="back-link">Back to Product List</a>
-        </div>
+                    <div class="form-field">
+                        <label for="quantity">Quantity</label>
+                        <input type="number" id="quantity" name="stock_quantity" value="${product.stock_quantity}" required>
+                    </div>
+
+                    <div class="form-field">
+                        <label for="category">Category</label>
+                        <select name="category_id" id="category">
+                            <option value="3" <c:if test="${product.category_id == 3}">selected</c:if>>SD (Super Deformed)</option>
+                            <option value="1" <c:if test="${product.category_id == 1}">selected</c:if>>HG (High Grade)</option>
+                            <option value="2" <c:if test="${product.category_id == 2}">selected</c:if>>MG (Master Grade)</option>
+                            <option value="4" <c:if test="${product.category_id == 4}">selected</c:if>>PG (Perfect Grade)</option>
+                            </select>
+                        </div>
+
+                    <c:if test="${action == 'update'}">
+                        <div class="form-field">
+                            <label for="status">Status</label>
+                            <input type="text" id="status" name="status" value="${product.status}" required>
+                        </div>
+                    </c:if>
+
+                    <div class="form-field image-upload-section">
+                        <label for="txtImage">Product Image</label>
+                        <input type="hidden" id="txtImage" name="image_url" value="${product.image_url}">
+                        <div class="upload-container">
+                            <div class="file-upload-wrapper">
+                                <button type="button" class="file-upload-button">Choose Image</button>
+                                <input type="file" id="imageUpload" class="file-upload-input" accept="image/*">
+                            </div>
+                            <div class="file-info" id="fileInfo">No file selected</div>
+                            <div class="progress-bar-container" id="progressContainer">
+                                <div class="progress-bar" id="progressBar"></div>
+                            </div>
+                        </div>
+                        <c:if test="${not empty requestScope.txtImage_error}">
+                            <div class="error-message">${requestScope.txtImage_error}</div>
+                        </c:if>
+                        <div class="image-preview" id="imagePreview">
+                            <c:if test="${not empty product.image_url}">
+                                <img src="${product.image_url}" alt="Product Preview">
+                            </c:if>
+                        </div>
+                    </div>
+
+                    <div class="form-actions">
+                        <input type="submit" value="Save" class="submit-btn">
+                        <input type="reset" value="Reset" class="reset-btn" id="resetBtn">
+                    </div>
+
+                    <c:if test="${not empty requestScope.mess}">
+                        <div class="form-message">${requestScope.mess}</div>
+                    </c:if>
+                </form>
+
+                <a href="AdminController?action=search" class="back-link">Back to Product List</a>
+            </div>
+        </c:if>
+
+        <c:if test="${!isAdmin}">
+            You do not have permission to access this content.
+            <a href="login.jsp">Go back to login</a>
+        </c:if>
 
         <!-- jQuery CDN -->
         <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
