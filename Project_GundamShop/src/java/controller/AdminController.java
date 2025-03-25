@@ -105,6 +105,7 @@ public class AdminController extends HttpServlet {
                 ProductsDTO product = new ProductsDTO(name, description, price, category_id, stock_quantity, image_url);
                 pd.create(product);
                 url = "productForm.jsp";
+                request.setAttribute("product", product);
                 request.setAttribute("mess", "Create successful");
             } catch (Exception e) {
             }
@@ -145,10 +146,11 @@ public class AdminController extends HttpServlet {
 
                 ProductsDTO product = new ProductsDTO(product_id, name, description, price, category_id, stock_quantity, image_url, status);
                 pd.update(product);
-                List<CategoryDTO> listC = cd.readAll();
-                url = processSearch(request, response);
-                request.setAttribute("listC", listC);
+                request.setAttribute("action", "update");
+                request.setAttribute("product", product);
                 request.setAttribute("mess", "Update successful");
+                
+                url = "productForm.jsp";
             } catch (Exception e) {
             }
 

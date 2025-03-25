@@ -196,7 +196,7 @@ public class ProductDAO implements IDAO<ProductsDTO, Integer> {
 
     @Override
     public ProductsDTO readById(Integer id) {
-        String sql = "SELECT * FROM Products WHERE product_id = ? AND stock_quantity > 0 AND status = 1";
+        String sql = "SELECT * FROM Products WHERE product_id = ?";
         try {
             Connection conn = DBUtils.getConnection();
             PreparedStatement ps = conn.prepareStatement(sql);
