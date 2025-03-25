@@ -193,6 +193,31 @@ public class ProductDAO implements IDAO<ProductsDTO, Integer> {
         }
         return list;
     }
+    
+    public List<ProductsDTO> readByCategoryForAD(int catID) {
+        List<ProductsDTO> list = new ArrayList<>();
+        String sql = "SELECT product_id, name, description, price, stock_quantity, image_url "
+                + "FROM Products WHERE category_id = ?";
+        try (Connection conn = DBUtils.getConnection();
+                PreparedStatement ps = conn.prepareStatement(sql)) {
+            ps.setInt(1, catID);
+            try (ResultSet rs = ps.executeQuery()) {
+                while (rs.next()) {
+                    ProductsDTO p = new ProductsDTO();
+                    p.setProduct_id(rs.getInt("product_id"));
+                    p.setName(rs.getString("name"));
+                    p.setDescription(rs.getString("description"));
+                    p.setPrice(rs.getDouble("price"));
+                    p.setStock_quantity(rs.getInt("stock_quantity"));
+                    p.setImage_url(rs.getString("image_url"));
+                    list.add(p);
+                }
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return list;
+    }
 
     @Override
     public ProductsDTO readById(Integer id) {

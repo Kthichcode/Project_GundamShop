@@ -41,7 +41,7 @@ public class AdminController extends HttpServlet {
             list = pd.readAll();
         } else {
             int categoryId = Integer.parseInt(categoryIdStr);
-            list = pd.readByCategory(categoryId);
+            list = pd.readByCategoryForAD(categoryId);
         }
 
         request.setAttribute("list", list);
@@ -101,7 +101,11 @@ public class AdminController extends HttpServlet {
                 int stock_quantity = Integer.parseInt(request.getParameter("stock_quantity"));
                 int category_id = Integer.parseInt(request.getParameter("category_id"));
                 String image_url = request.getParameter("image_url");
-
+                
+                boolean checkError = false;
+                
+                
+                
                 ProductsDTO product = new ProductsDTO(name, description, price, category_id, stock_quantity, image_url);
                 pd.create(product);
                 url = "productForm.jsp";
