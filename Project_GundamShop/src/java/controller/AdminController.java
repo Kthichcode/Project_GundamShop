@@ -77,12 +77,10 @@ public class AdminController extends HttpServlet {
         if (AuthUtils.isAdmin(session)) {
             int id = Integer.parseInt(request.getParameter("id"));
             ProductsDTO product = pd.readById(id);
-            List<CategoryDTO> listC = cd.readAll();
-            
+
             if (product != null) {
                 request.setAttribute("product", product);
                 request.setAttribute("action", "update");
-                request.setAttribute("listC", listC);
                 url = "productForm.jsp";
             } else {
                 url = processSearch(request, response);
@@ -95,8 +93,8 @@ public class AdminController extends HttpServlet {
             throws ServletException, IOException {
         String url = MANAGE_PAGE;
         HttpSession session = request.getSession();
-        if (AuthUtils.isAdmin(session)) {        
-            try {
+        if (AuthUtils.isAdmin(session)) {
+            try {              
                 String name = request.getParameter("name");
                 String description = request.getParameter("description");
                 double price = Double.parseDouble(request.getParameter("price"));
@@ -106,13 +104,39 @@ public class AdminController extends HttpServlet {
                 
                 ProductsDTO product = new ProductsDTO(name, description, price, category_id, stock_quantity, image_url);
                 pd.create(product);
-                List<CategoryDTO> listC = cd.readAll();
                 url = "productForm.jsp";
-                request.setAttribute("listC", listC);
                 request.setAttribute("mess", "Create successful");
             } catch (Exception e) {
             }
+
+        }
+        return url;
+    }
+
+    private String processUpdate(HttpServletRequest request, HttpServletResponse response)
+            throws ServletException, IOException {
+        String url = MANAGE_PAGE;
+        HttpSession session = request.getSession();
+        if (AuthUtils.isAdmin(session)) {
+            try {
+                int product_id = Integer.parseInt(request.getParameter("product_id"));
+                String name = request.getParameter("name");
+                String description = request.getParameter("description");
+                double price = Double.parseDouble(request.getParameter("price"));
+                int stock_quantity = Integer.parseInt(request.getParameter("stock_quantity"));
+                int category_id = Integer.parseInt(request.getParameter("category_id"));
+                String image_url = request.getParameter("image_url");
+                boolean status = Boolean.parseBoolean(request.getParameter("status"));
                 
+                ProductsDTO product = new ProductsDTO(product_id, name, description, price, category_id, stock_quantity, image_url, status);
+                pd.update(product);
+                List<CategoryDTO> listC = cd.readAll();
+                url = processSearch(request, response);
+                request.setAttribute("listC", listC);
+                request.setAttribute("mess", "Update successful");
+            } catch (Exception e) {
+            }
+
         }
         return url;
     }
@@ -129,10 +153,12 @@ public class AdminController extends HttpServlet {
             } else {
                 if (action.equals("search")) {
                     url = processSearch(request, response);
-                }else if(action.equals("create")){
+                } else if (action.equals("create")) {
                     url = processCreate(request, response);
-                }else if(action.equals("edit")){
+                } else if (action.equals("edit")) {
                     url = processEdit(request, response);
+                } else if (action.equals("update")) {
+                    url = processUpdate(request, response);
                 }
             }
         } catch (Exception e) {

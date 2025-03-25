@@ -267,14 +267,14 @@
                 product = (ProductsDTO) request.getAttribute("product");
             }
 
-            String action = request.getAttribute("action") + "";
-            if (!action.equals("update")) {
+            String action = (String) request.getAttribute("action");
+            if (action == null || action.isEmpty()) {
                 action = "create";
             }
         %>
 
         <form action="AdminController" method="post">
-            <input type="hidden" name="action" value="create"/>
+            <input type="text" name="action" value="${not empty action ? action : 'create'}"/>
 
             <c:if test="${action == 'update'}">
                 ProductID: <input type="text" name="product_id" value="${product.product_id}" ${not empty product.product_id ? 'readonly' : ''}/> <br/>
@@ -290,7 +290,7 @@
 
             <div class="form-group">
                 <label for="txtImage">Product Cover Image:</label>
-                <input type="hidden" id="txtImage" name="image_url" value="img/${product.image_url}"/>
+                <input type="hidden" id="txtImage" name="image_url" value="${product.image_url}"/>
                 <div class="upload-container">
                     <div class="file-upload-wrapper">
                         <button type="button" class="file-upload-button">Choose an Image</button>
@@ -306,13 +306,17 @@
                 </c:if>
                 <div class="image-preview" id="imagePreview">
                     <c:if test="${not empty product.image_url}">
-                        <img src="img/${product.image_url}"/>
+                        <img src="${product.image_url}"/>
                     </c:if>
                 </div>
             </div>
 
             <input type="submit" value="Save"/> <br/>
+            <input type="reset" value="Reset"/>
+            ${requestScope.mess==null?"":requestScope.mess}
         </form>
+
+        <a href="AdminController?action=search" class="back-link">Back to Product List</a>
 
         <script>
             // JavaScript để cải thiện trải nghiệm người dùng

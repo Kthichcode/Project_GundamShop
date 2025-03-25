@@ -74,7 +74,32 @@ public class ProductDAO implements IDAO<ProductsDTO, Integer> {
 
     @Override
     public boolean update(ProductsDTO entity) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        String sql = "UPDATE Products SET name = ?, "
+                + "description = ?, "
+                + "price = ?, "
+                + "stock_quantity = ?, "
+                + "category_id = ?, "
+                + "image_url = ?, "
+                + "status = ? "
+                + "WHERE product_id = ?";
+        try (Connection conn = DBUtils.getConnection();
+                PreparedStatement ps = conn.prepareStatement(sql)) {
+
+            ps.setString(1, entity.getName());
+            ps.setString(2, entity.getDescription());
+            ps.setDouble(3, entity.getPrice());
+            ps.setInt(4, entity.getStock_quantity());
+            ps.setInt(5, entity.getCategory_id());
+            ps.setString(6, entity.getImage_url());
+            ps.setBoolean(7, entity.isStatus());
+            ps.setInt(8, entity.getProduct_id());
+
+            int rowsUpdated = ps.executeUpdate();
+            return rowsUpdated > 0;
+        } catch (SQLException | ClassNotFoundException e) {
+            e.printStackTrace();
+        }
+        return false;
     }
 
     @Override
@@ -247,21 +272,20 @@ public class ProductDAO implements IDAO<ProductsDTO, Integer> {
         }
         return products;
     }
-    
-    public int getTotalProductsByCategory(int categoryId) {
-    String sql = "SELECT COUNT(*) FROM Products WHERE category_id = ?";
-    try (Connection conn = DBUtils.getConnection();
-         PreparedStatement ps = conn.prepareStatement(sql)) {
-        ps.setInt(1, categoryId);
-        ResultSet rs = ps.executeQuery();
-        if (rs.next()) {
-            return rs.getInt(1);
-        }
-    } catch (SQLException | ClassNotFoundException ex) {
-        ex.printStackTrace();
-    }
-    return 0;
-}
 
+    public int getTotalProductsByCategory(int categoryId) {
+        String sql = "SELECT COUNT(*) FROM Products WHERE category_id = ?";
+        try (Connection conn = DBUtils.getConnection();
+                PreparedStatement ps = conn.prepareStatement(sql)) {
+            ps.setInt(1, categoryId);
+            ResultSet rs = ps.executeQuery();
+            if (rs.next()) {
+                return rs.getInt(1);
+            }
+        } catch (SQLException | ClassNotFoundException ex) {
+            ex.printStackTrace();
+        }
+        return 0;
+    }
 
 }
