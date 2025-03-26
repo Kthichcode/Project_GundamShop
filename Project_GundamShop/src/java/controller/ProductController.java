@@ -6,8 +6,10 @@
 package controller;
 
 import dao.ProductDAO;
+import dto.BreadcrumbItemDTO;
 import dto.ProductsDTO;
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.List;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -98,9 +100,17 @@ public class ProductController extends HttpServlet {
         int id = Integer.parseInt(request.getParameter("id"));
         ProductsDTO product = pd.readById(id);
         request.setAttribute("product", product);
-        url = "productDetail.jsp";
+        int catId = product.getCategory_id();
+        String categoryName = pd.getCategoryName(catId);
 
-        return url;
+        List<BreadcrumbItemDTO> breadcrumb = new ArrayList<>();
+        breadcrumb.add(new BreadcrumbItemDTO("Trang chủ", "ProductController?action=showAll"));
+        breadcrumb.add(new BreadcrumbItemDTO(categoryName, "ProductController?action=filterCategory&categoryId=" + product.getCategory_id()));
+        breadcrumb.add(new BreadcrumbItemDTO(product.getName(), null));
+        request.setAttribute("breadcrumb", breadcrumb);
+
+        return "productDetail.jsp";
+
     }
 
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)

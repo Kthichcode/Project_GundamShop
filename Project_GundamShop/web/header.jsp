@@ -26,10 +26,11 @@
                 <li class="menu-item dropdown">
                     <a href="#">Sản phẩm</a>
                     <div class="dropdown-content">
-                        <a href="ProductController?action=filterCategory&categoryId=3">SD (Super Deformed)</a>
-                        <a href="ProductController?action=filterCategory&categoryId=1">HG (High Grade</a>
-                        <a href="ProductController?action=filterCategory&categoryId=2">MG (Master Grade)</a>
-                        <a href="ProductController?action=filterCategory&categoryId=4">PG (Perfect Grade)</a>
+                        <a href="ProductController?action=filterCategory&categoryId=1">SD (Super Deformed)</a>
+                        <a href="ProductController?action=filterCategory&categoryId=2">HG (High Grade</a>
+                        <a href="ProductController?action=filterCategory&categoryId=3">RG (Real Grade)</a>
+                        <a href="ProductController?action=filterCategory&categoryId=4">MG (Master Grade)</a>
+                        <a href="ProductController?action=filterCategory&categoryId=5">PG (Perfect Grade)</a>
                     </div>
                 </li>
                 <li class="menu-item"><a href="CartController?action=view">Giỏ hàng</a></li>

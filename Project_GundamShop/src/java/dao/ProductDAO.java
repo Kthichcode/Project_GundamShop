@@ -138,7 +138,7 @@ public class ProductDAO implements IDAO<ProductsDTO, Integer> {
         }
         return list;
     }
-    
+
     public List<ProductsDTO> searchByTitleForAD(String searchTerm) {
 
         String sql = "SELECT * FROM Products WHERE name LIKE ?";
@@ -193,11 +193,11 @@ public class ProductDAO implements IDAO<ProductsDTO, Integer> {
         }
         return list;
     }
-    
+
     public List<ProductsDTO> readByCategoryForAD(int catID) {
         List<ProductsDTO> list = new ArrayList<>();
         String sql = "SELECT * FROM Products WHERE category_id = ?";
-               
+
         try (Connection conn = DBUtils.getConnection();
                 PreparedStatement ps = conn.prepareStatement(sql)) {
             ps.setInt(1, catID);
@@ -209,7 +209,7 @@ public class ProductDAO implements IDAO<ProductsDTO, Integer> {
                     p.setDescription(rs.getString("description"));
                     p.setPrice(rs.getDouble("price"));
                     p.setCategory_id(rs.getInt("category_id"));
-                    p.setStock_quantity(rs.getInt("stock_quantity"));              
+                    p.setStock_quantity(rs.getInt("stock_quantity"));
                     p.setImage_url(rs.getString("image_url"));
                     p.setStatus(rs.getBoolean("status"));
                     list.add(p);
@@ -346,10 +346,10 @@ public class ProductDAO implements IDAO<ProductsDTO, Integer> {
         }
         return 0;
     }
-    
-    public boolean setStatusToZero(int productId){
+
+    public boolean setStatusToZero(int productId) {
         String sql = "UPDATE Products SET status = 0 WHERE product_id = ?";
-        try{
+        try {
             Connection conn = DBUtils.getConnection();
             PreparedStatement ps = conn.prepareStatement(sql);
 
@@ -363,6 +363,21 @@ public class ProductDAO implements IDAO<ProductsDTO, Integer> {
             Logger.getLogger(ProductDAO.class.getName()).log(Level.SEVERE, null, ex);
         }
         return false;
+    }
+
+    public String getCategoryName(int categoryId) {
+        String sql = "SELECT name FROM Categories WHERE category_id = ?";
+        try (Connection conn = DBUtils.getConnection();
+                PreparedStatement ps = conn.prepareStatement(sql)) {
+            ps.setInt(1, categoryId);
+            ResultSet rs = ps.executeQuery();
+            if (rs.next()) {
+                return rs.getString("name");
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return "Sản phẩm"; // giá trị mặc định
     }
 
 }
