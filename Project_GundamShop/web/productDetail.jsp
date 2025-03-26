@@ -14,26 +14,26 @@
         <meta charset="UTF-8">
         <title>Mô Hình Lắp Ráp - Chi tiết sản phẩm</title>
         <link rel="stylesheet" href="assets/css/detail.css">
-        
+        <!-- Nếu muốn dùng Google Fonts -->
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:400,500,700&display=swap">
+
+
     </head>
     <body>
         <%@ include file="header.jsp" %>
 
-        <!-- Breadcrumb: hiển thị đường dẫn -->
+        <!-- Breadcrumb -->
         <c:if test="${not empty breadcrumb}">
-            <div class="breadcrumb">
+            <div class="breadcrumb-container">
                 <c:forEach var="item" items="${breadcrumb}" varStatus="status">
                     <c:choose>
                         <c:when test="${not empty item.url}">
-                            <!-- Nếu có URL, hiển thị dưới dạng link -->
                             <a href="${item.url}">${item.label}</a>
                         </c:when>
                         <c:otherwise>
-                            <!-- Nếu không có URL, đây là trang hiện tại -->
                             <span>${item.label}</span>
                         </c:otherwise>
                     </c:choose>
-                    <!-- Hiển thị dấu phân cách nếu không phải phần tử cuối cùng -->
                     <c:if test="${!status.last}">
                         <span class="separator">&gt;</span>
                     </c:if>
@@ -41,59 +41,111 @@
             </div>
         </c:if>
 
-        <!-- Phần chi tiết sản phẩm -->
+        <!-- Phần Chi tiết sản phẩm -->
         <c:set var="p" value="${requestScope.product}" />
-        <!-- Kiểm tra đăng nhập -->
         <c:set var="userLoggedIn" value="${not empty sessionScope.user}" />
 
-        <div class="container">
-            <div class="left">
-                <div class="main-image">
-                    <img id="mainImg" src="${p.image_url}" alt="Mô hình lắp ráp">
-                </div>
+        <div class="product-detail-wrapper">
+            <!-- Cột trái: Hình ảnh sản phẩm -->
+            <div class="left-column">
+                <img class="main-image" src="${p.image_url}" alt="${p.name}">
+                <!-- Có thể thêm dải thumbnail nếu cần -->
             </div>
-            <div class="right">
-                <div class="title">MÔ HÌNH LẮP RÁP ${p.name}</div>
-                <div class="status">Tình trạng: Còn hàng</div>
-                <div class="price-container">
-                    <p class="price">
-                        <fmt:formatNumber value="${p.price}" pattern="#,##0" />đ
-                    </p>
+
+            <!-- Cột phải: Thông tin sản phẩm -->
+            <div class="right-column">
+                <h1 class="product-title">${p.name}</h1>
+                <div class="product-status">Tình trạng: <span class="highlight">Còn hàng</span></div>
+                <div class="product-price">
+                    <fmt:formatNumber value="${p.price}" pattern="#,##0" /> đ
                 </div>
-                <!-- Mô tả sản phẩm -->
-                <div class="description">
-                    <h3>Mô tả sản phẩm</h3>
+
+                <!-- Phần mô tả ngắn -->
+                <div class="short-description">
                     <p>${p.description}</p>
                 </div>
-                <!-- Form thêm vào giỏ -->
-                <form action="CartController" method="get">
+
+                <!-- Form thêm sản phẩm vào giỏ -->
+                <form action="CartController" method="get" class="add-cart-form">
                     <input type="hidden" name="action" value="add"/>
                     <input type="hidden" name="productId" value="${p.product_id}"/>
-
-                    <div class="quantity">
+                    <div class="quantity-box">
                         <label for="quantity">Số lượng:</label>
-                        <button type="button" onclick="decreaseQuantity()">-</button>
-                        <input type="text" id="quantity" name="quantity" value="1">
-                        <button type="button" onclick="increaseQuantity()">+</button>
+                        <div class="quantity-controls">
+                            <button type="button" onclick="decreaseQuantity()">-</button>
+                            <input type="text" id="quantity" name="quantity" value="1">
+                            <button type="button" onclick="increaseQuantity()">+</button>
+                        </div>
                     </div>
-
-                    <div class="buttons">
+                    <div class="action-buttons">
                         <c:choose>
                             <c:when test="${userLoggedIn}">
-                                <!-- Nếu đã đăng nhập, cho phép submit form và mua ngay -->
-                                <button type="submit" class="btn btn-cart">🛒 THÊM VÀO GIỎ</button>
-                                <a href="CartController?action=view" class="btn btn-buy">MUA NGAY</a>
+                                <button type="submit" class="btn btn-cart">🛒 Thêm vào giỏ</button>
+                                <a href="CartController?action=view" class="btn btn-buy">Mua ngay</a>
                             </c:when>
                             <c:otherwise>
-                                <!-- Nếu chưa đăng nhập, chuyển hướng sang trang login -->
-                                <a href="login.jsp" class="btn btn-cart">🛒 THÊM VÀO GIỎ</a>
-                                <a href="login.jsp" class="btn btn-buy">MUA NGAY</a>
+                                <a href="login.jsp" class="btn btn-cart">🛒 Thêm vào giỏ</a>
+                                <a href="login.jsp" class="btn btn-buy">Mua ngay</a>
                             </c:otherwise>
                         </c:choose>
                     </div>
                 </form>
+
+                <!-- Chính sách vận chuyển & hỗ trợ -->
+                <div class="policy-section">
+                    <h4>Chính sách & Dịch vụ</h4>
+                    <ul>
+                        <li>Giao hàng toàn quốc</li>
+                        <li>Thanh toán khi nhận hàng</li>
+                        <li>Đổi trả trong 7 ngày nếu sản phẩm lỗi</li>
+                        <li>Hỗ trợ kỹ thuật 24/7</li>
+                    </ul>
+                </div>
             </div>
         </div>
+
+        <!-- Phần Thông số kỹ thuật & Mô tả chi tiết -->
+        <div class="additional-info">
+            <h2>Thông số kỹ thuật</h2>
+            <table class="spec-table">
+
+
+                <tr>
+                    <th>Nhà sản xuất </th>
+                    <td> BANDAI</td>
+                </tr>
+                
+                
+                 <tr>
+                    <th>Xuất sứ </th>
+                    <td>Japan </td>
+                </tr>
+
+                <tr>
+                    <th>Kích thước</th>
+                    <td>15 x 10 x 8 cm</td>
+                </tr>
+                <tr>
+                    <th>Chất liệu</th>
+                    <td>Nhựa cao cấp, đặc biệt thích hợp cho các anh em nghiện hít nhựa
+                        giai đoạn cuối </td>
+                </tr>
+                <tr>
+                    <th>Số lượng chi tiết</th>
+                    <td>90000 chi tiết</td>
+                </tr>
+
+
+                <!-- Bạn có thể bổ sung thêm các thông số khác -->
+            </table>
+
+            <h2>Mô tả chi tiết</h2>
+            <p>
+                Đây là mô hình Gundam được sản xuất theo tiêu chuẩn cao, có chi tiết tinh xảo, chất lượng đảm bảo và phù hợp cho cả người mới bắt đầu lẫn người sưu tập. Sản phẩm có thiết kế hiện đại, màu sắc sống động, mang đến trải nghiệm lắp ráp độc đáo.
+            </p>
+        </div>
+
+        <%@ include file="footer.jsp" %>
 
         <script>
             function increaseQuantity() {
@@ -107,7 +159,5 @@
                 }
             }
         </script>
-
-        <%@ include file="footer.jsp" %>
     </body>
 </html>

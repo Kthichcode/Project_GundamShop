@@ -35,10 +35,11 @@
                     <label for="category">Chọn danh mục:</label>
                     <select name="categoryId" id="category">
                         <option value="">Tất cả</option>
-                        <option value="3">SD (Super Deformed)</option>
-                        <option value="1">HG (High Grade)</option>
-                        <option value="2">MG (Master Grade)</option>
-                        <option value="4">PG (Perfect Grade)</option>
+                        <option value="1">SD (Super Deformed)</option>
+                        <option value="2">HG (High Grade)</option>
+                        <option value="3">SD (Real Grade)</option>
+                        <option value="4">MG (Master Grade)</option>
+                        <option value="5">PG (Perfect Grade)</option>
 
                     </select>
                     <button type="submit">Lọc</button>

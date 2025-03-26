@@ -55,7 +55,7 @@
 
                     <div class="form-field">
                         <label for="price">Price</label>
-                        <input type="text" id="price" name="price" value="${product.price}">
+                        <input type="text" id="price" name="price" value="${product.price}" required>
                         <c:if test="${not empty requestScope.price_Error}">
                             <div class="error-message">${requestScope.price_Error}</div>
                         </c:if>
@@ -82,7 +82,10 @@
                     <c:if test="${action == 'update'}">
                         <div class="form-field">
                             <label for="status">Status</label>
-                            <input type="text" id="status" name="status" value="${product.status}" required>
+                            <select name="status" id="status">
+                                <option value="false" <c:if test="${product.status == 'false'}">selected</c:if>>Block</option>
+                                <option value="true" <c:if test="${product.status == 'true'}">selected</c:if>>UnBlock</option>
+                            </select>
                         </div>
                     </c:if>
 

@@ -1,142 +1,213 @@
-body {
-    text-align: center;
-    background-color: #f5f5f5;
+/* ---------- RESET ---------- */
+/* =============================
+   RESET & BASE
+   ============================= */
+* {
     margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+body {
+    font-family: 'Roboto', sans-serif;
+    background-color: #f8f9fa; /* Màu nền nhã nhặn */
+    color: #333;
+    line-height: 1.5;
 }
 
-.container {
+/* =============================
+   BREADCRUMB
+   ============================= */
+.breadcrumb-container {
+    max-width: 1200px;
+    margin: 20px auto 10px;
+    font-size: 14px;
+    color: #555;
+}
+.breadcrumb-container a {
+    text-decoration: none;
+    color: #007bff;
+}
+.breadcrumb-container .separator {
+    margin: 0 5px;
+    color: #999;
+}
+.breadcrumb-container span {
+    margin: 0 5px;
+}
+
+/* =============================
+   PRODUCT DETAIL WRAPPER
+   ============================= */
+.product-detail-wrapper {
+    max-width: 1200px;
+    margin: 0 auto 20px;
+    display: flex;
+    gap: 30px;
+    padding: 20px;
+    background-color: #fff;     /* Nền trắng */
+    border-radius: 8px;         /* Bo góc nhẹ */
+    box-shadow: 0 2px 8px rgba(0,0,0,0.1); /* Đổ bóng nhẹ */
+}
+
+/* LEFT COLUMN: PRODUCT IMAGE */
+.left-column {
+    flex: 1;
     display: flex;
     justify-content: center;
     align-items: center;
-    max-width: 900px;
-    margin: 50px auto; /* Căn giữa theo chiều ngang và tạo khoảng cách với header/footer */
-    background: white;
-    padding: 30px;
-    border-radius: 10px;
-    box-shadow: 0 0 15px rgba(0, 0, 0, 0.2);
 }
-
-.left {
-    flex: 1;
-    text-align: center;
-}
-
-.main-image img {
+.main-image {
+    max-width: 400px;
     width: 100%;
-    border-radius: 10px;
+    border-radius: 6px;
+    border: 1px solid #ddd;
 }
 
-.right {
-    flex: 1;
-    padding-left: 30px;
-    text-align: left;
+/* RIGHT COLUMN: PRODUCT INFO */
+.right-column {
+    flex: 1.2;
 }
-
-.title {
-    font-size: 22px;
-    font-weight: bold;
+.product-title {
+    font-size: 26px;
+    margin-bottom: 8px;
+    color: #222;
+}
+.product-status {
     margin-bottom: 10px;
+    font-size: 15px;
 }
-
-.status {
-    color: green;
-    font-size: 18px;
+.highlight {
+    color: #28a745; /* xanh lá đậm */
     font-weight: bold;
 }
-
-.price {
-    font-size: 28px;
+.product-price {
+    color: #d00;
+    font-size: 24px;
     font-weight: bold;
-    color: #007bff;
-    margin: 15px 0;
+    margin-bottom: 16px;
+}
+.short-description {
+    font-size: 15px;
+    color: #555;
+    margin-bottom: 20px;
 }
 
-.quantity {
-    display: flex;
+/* FORM ADD TO CART */
+.add-cart-form {
+    margin-bottom: 20px;
+}
+.quantity-box {
+    margin-bottom: 15px;
+}
+.quantity-box label {
+    font-weight: 500;
+    margin-right: 8px;
+}
+.quantity-controls {
+    display: inline-flex;
     align-items: center;
-    margin: 15px 0;
-    font-size: 20px;
 }
-
-.quantity button {
-    padding: 8px 15px;
-    font-size: 20px;
+.quantity-controls button {
+    width: 32px;
+    height: 32px;
+    background-color: #f0f0f0;
     border: 1px solid #ccc;
-    background: #fff;
     cursor: pointer;
+    font-size: 16px;
 }
-
-.quantity input {
+.quantity-controls input {
     width: 50px;
     text-align: center;
-    font-size: 20px;
-    margin: 0 10px;
+    margin: 0 5px;
     border: 1px solid #ccc;
+    border-radius: 4px;
 }
 
-.buttons {
+/* ACTION BUTTONS */
+.action-buttons {
     display: flex;
     gap: 15px;
-    margin-top: 20px;
+    margin-bottom: 20px;
 }
-
 .btn {
-    flex: 1;
-    padding: 15px;
-    font-size: 18px;
-    border: none;
-    border-radius: 5px;
-    cursor: pointer;
-}
-
-.btn-cart {
-    background-color: #007bff;
-    color: white;
-}
-
-.btn-buy {
-    background-color: #ffc107;
-    color: black;
-}
-
-/* Đảm bảo responsive trên màn hình nhỏ */
-@media (max-width: 768px) {
-    .container {
-        flex-direction: column;
-        width: 90%;
-        padding: 20px;
-    }
-
-    .right {
-        padding-left: 0;
-        text-align: center;
-    }
-
-    .quantity {
-        justify-content: center;
-    }
-
-    .buttons {
-        flex-direction: column;
-    }
-}
-
-
-/* CSS cho breadcrumb */
-.breadcrumb {
-    margin: 15px 0;
-    font-size: 14px;
-}
-.breadcrumb a {
+    display: inline-block;
+    padding: 10px 18px;
+    border-radius: 4px;
+    font-weight: 600;
     text-decoration: none;
-    color: #007bff;
-    margin: 0 5px;
+    text-align: center;
+    color: #fff;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
 }
-.breadcrumb span {
-    margin: 0 5px;
-    font-weight: bold;
-    color: #d00;
+.btn-cart {
+    background-color: #17a2b8; /* xanh lam nhạt */
 }
-.breadcrumb .separator {
-    margin: 0 5px;
+.btn-cart:hover {
+    background-color: #138496;
+}
+.btn-buy {
+    background-color: #ffc107; /* vàng */
+    color: #222;
+}
+.btn-buy:hover {
+    background-color: #e0a800;
+    color: #fff;
+}
+
+/* POLICY SECTION */
+.policy-section {
+    padding: 15px;
+    background-color: #f9f9f9;
+    border: 1px solid #eee;
+    border-radius: 6px;
+}
+.policy-section h4 {
+    margin-bottom: 10px;
+    font-size: 16px;
+}
+.policy-section ul {
+    list-style-type: disc;
+    padding-left: 20px;
+    color: #555;
+}
+.policy-section ul li {
+    margin: 6px 0;
+}
+
+/* =============================
+   ADDITIONAL INFO
+   ============================= */
+.additional-info {
+    max-width: 1200px;
+    margin: 0 auto 40px;
+    background-color: #fff;
+    padding: 20px;
+    border-radius: 8px;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+}
+.additional-info h2 {
+    margin-bottom: 10px;
+    font-size: 20px;
+    color: #222;
+}
+.spec-table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-bottom: 20px;
+}
+.spec-table th,
+.spec-table td {
+    border: 1px solid #ddd;
+    padding: 8px;
+    text-align: left;
+}
+.spec-table th {
+    background-color: #f0f0f0;
+    font-weight: 600;
+}
+.additional-info p {
+    font-size: 15px;
+    color: #555;
+    line-height: 1.6;
 }

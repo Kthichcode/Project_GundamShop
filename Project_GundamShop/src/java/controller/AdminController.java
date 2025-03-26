@@ -155,15 +155,22 @@ public class AdminController extends HttpServlet {
                 int product_id = Integer.parseInt(request.getParameter("product_id"));
                 String name = request.getParameter("name");
                 String description = request.getParameter("description");
-                double price = Double.parseDouble(request.getParameter("price"));
                 int stock_quantity = Integer.parseInt(request.getParameter("stock_quantity"));
                 int category_id = Integer.parseInt(request.getParameter("category_id"));
                 String image_url = request.getParameter("image_url");
                 boolean status = Boolean.parseBoolean(request.getParameter("status"));
                 boolean checkError = false;
 
-                if (price < 0) {
-                    request.setAttribute("price_Error", "Price must be > 0");
+                double price = 0;
+                String priceStr = request.getParameter("price");
+                try {
+                    price = Double.parseDouble(priceStr);
+                    if (price < 0) {
+                        request.setAttribute("price_Error", "Price must be > 0");
+                        checkError = true;
+                    }
+                } catch (NumberFormatException e) {
+                    request.setAttribute("price_Error", "Price must be a valid number");
                     checkError = true;
                 }
 

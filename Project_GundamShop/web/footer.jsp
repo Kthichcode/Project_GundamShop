@@ -132,10 +132,11 @@
         <div class="footer-section">
             <h3>Danh mục sản phẩm</h3>
             <ul class="footer-links">
-                <li><a href="ProductController?action=filterCategory&categoryId=3">SD (Super Deformed)</a></li>
-                <li><a href="ProductController?action=filterCategory&categoryId=1">HG (High Grade</a></li>
-                <li><a href="ProductController?action=filterCategory&categoryId=2">MG (Master Grade)</a></li>
-                <li><a href="ProductController?action=filterCategory&categoryId=4">PG (Perfect Grade)</a></li>
+                <li><a href="ProductController?action=filterCategory&categoryId=1">SD (Super Deformed)</a></li>
+                <li><a href="ProductController?action=filterCategory&categoryId=2">HG (High Grade)</a></li>
+                <li><a href="ProductController?action=filterCategory&categoryId=3">RG (Real Grade)</a></li>
+                <li><a href="ProductController?action=filterCategory&categoryId=4">MG (Master Grade)</a></li>
+                <li><a href="ProductController?action=filterCategory&categoryId=5">PG (Perfect Grade)</a></li>
                 
             </ul>
         </div>
