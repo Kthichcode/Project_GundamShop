@@ -26,9 +26,12 @@ public class ProductController extends HttpServlet {
     private static final String LOGIN_PAGE = "login.jsp";
     private static final String SIGN_UP_PAGE = "sign_up.jsp";
     private static final String HOME_PAGE = "home.jsp";
-
+    
     private ProductDAO pd = new ProductDAO();
 
+    public ProductController() {
+    }
+    
     public String processPrintAll(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         String url = HOME_PAGE;
