@@ -36,11 +36,11 @@
                 <li class="menu-item"><a href="CartController?action=view">Giỏ hàng</a></li>
                 <li class="menu-item"><a href="https://www.youtube.com/@LeMing10/videos">Liên hệ</a></li>
             </ul>
-
+            <c:set var="searchTerm" value="${requestScope.searchTerm==null?'':requestScope.searchTerm}" />
             <div class="search-bar">
                 <form action="ProductController" method="GET">
                     <input type="hidden" name="action" value="search">
-                    <input type="text" name="searchTerm" class="search-input" placeholder="Tìm kiếm...">
+                    <input type="text" name="searchTerm" class="search-input" placeholder="Tìm kiếm..." value="${searchTerm}">
                     <button class="search-button">🔍</button>
                 </form>
             </div>

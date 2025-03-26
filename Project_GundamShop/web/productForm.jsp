@@ -84,7 +84,7 @@
                             <label for="status">Status</label>
                             <select name="status" id="status">
                                 <option value="false" <c:if test="${product.status == 'false'}">selected</c:if>>Block</option>
-                                <option value="true" <c:if test="${product.status == 'true'}">selected</c:if>>UnBlock</option>
+                                <option value="true" <c:if test="${product.status == 'true'}">selected</c:if>>Active</option>
                             </select>
                         </div>
                     </c:if>

@@ -21,7 +21,7 @@
                 <img src="img/banner4.jpg" alt="Banner 1">
             </div>
             <div class="mySlides">
-                <img src="img/Banner1.jpg" alt="Banner 2">
+                <img src="img/BannerZaku.jpg" alt="Banner 2">
             </div>
             <div class="mySlides">
                 <img src="img/Banner2.jpg" alt="Banner 3">
