@@ -8,6 +8,8 @@
         <title>Minh.Đạt Gunpla Shop - Home</title>
         <!-- CSS riêng cho trang home -->
         <link rel="stylesheet" type="text/css" href="assets/css/home1.css">
+        
+        
 
         <!-- Style bổ sung cho phần phân trang (nếu cần) -->       
     </head>

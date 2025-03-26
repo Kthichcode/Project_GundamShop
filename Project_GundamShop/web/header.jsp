@@ -22,9 +22,9 @@
             <a href="ProductController" class="logo">Minh.Đạt Gunpla Shop</a>
 
             <ul class="menu">
-                <li class="menu-item"><a href="ProductController">Trang chủ</a></li>
+                <li class="menu-item"><a href="ProductController">🏠 Trang chủ</a></li>
                 <li class="menu-item dropdown">
-                    <a href="#">Sản phẩm</a>
+                    <a href="#">🤖 Sản phẩm</a>
                     <div class="dropdown-content">
                         <a href="ProductController?action=filterCategory&categoryId=1">SD (Super Deformed)</a>
                         <a href="ProductController?action=filterCategory&categoryId=2">HG (High Grade</a>
@@ -33,8 +33,8 @@
                         <a href="ProductController?action=filterCategory&categoryId=5">PG (Perfect Grade)</a>
                     </div>
                 </li>
-                <li class="menu-item"><a href="CartController?action=view">Giỏ hàng</a></li>
-                <li class="menu-item"><a href="https://www.youtube.com/@LeMing10/videos">Liên hệ</a></li>
+                <li class="menu-item"><a href="CartController?action=view">🛒 Giỏ hàng</a></li>
+                <li class="menu-item"><a href="https://www.youtube.com/@LeMing10/videos">📞 Liên hệ</a></li>
             </ul>
             <c:set var="searchTerm" value="${requestScope.searchTerm==null?'':requestScope.searchTerm}" />
             <div class="search-bar">
@@ -51,13 +51,19 @@
                     <img src="icon/user3.png" alt="User Icon">
                 </button>
                 <div class="dropdown-menu">
-                    <a href="login.jsp">Đăng nhập</a>
-                    <a href="sign_up.jsp">Đăng ký</a>
-                    <a href="account.jsp">Tài khoản</a>
-                    <a href="UserController?action=logout">Đăng xuất</a>
-                    <c:if test="${isAdmin}">
-                        <a href="AdminController?action=search">Quản lí</a>
-                    </c:if>
+                    <c:choose>
+                        <c:when test="<%= AuthUtils.isLoggedIn(session)%>">
+                            <a href="account.jsp">🛡️ Tài khoản</a>
+                            <a href="UserController?action=logout">🚪 Đăng xuất</a>
+                            <c:if test="<%= AuthUtils.isAdmin(session)%>">
+                                <a href="AdminController?action=search">⚙️ Quản lý</a>
+                            </c:if>
+                        </c:when>
+                        <c:otherwise>
+                            <a href="login.jsp">🔑 Đăng nhập</a>
+                            <a href="sign_up.jsp">📝 Đăng ký</a>
+                        </c:otherwise>
+                    </c:choose>
                 </div>
             </div>
 
