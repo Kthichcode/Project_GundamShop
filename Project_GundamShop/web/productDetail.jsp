@@ -81,7 +81,7 @@
                         <c:choose>
                             <c:when test="${userLoggedIn}">
                                 <button type="submit" class="btn btn-cart">🛒 Thêm vào giỏ</button>
-                                <a href="CartController?action=view" class="btn btn-buy">Mua ngay</a>
+                                <a href="ProductController?action=buy&product_id=${p.product_id}" class="btn btn-buy">Mua ngay</a>
                             </c:when>
                             <c:otherwise>
                                 <a href="login.jsp" class="btn btn-cart">🛒 Thêm vào giỏ</a>

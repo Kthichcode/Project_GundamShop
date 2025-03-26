@@ -8,6 +8,7 @@ package controller;
 import dao.ProductDAO;
 import dto.BreadcrumbItemDTO;
 import dto.ProductsDTO;
+import dto.UserDTO;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
@@ -112,6 +113,27 @@ public class ProductController extends HttpServlet {
         return "productDetail.jsp";
 
     }
+    
+    public String processBuyProduct(HttpServletRequest request, HttpServletResponse response)
+            throws ServletException, IOException {
+        HttpSession session = request.getSession();
+        String url = LOGIN_PAGE;
+        //int product_id = Integer.parseInt(request.getParameter("product_id"));
+        String[] productIds = request.getParameterValues("product_id");
+        
+        List<ProductsDTO> products = new ArrayList<>();
+        for (String productId : productIds) {
+            int id = Integer.parseInt(productId);
+            ProductsDTO p = pd.readById(id);
+            products.add(p);
+        }
+        UserDTO user = (UserDTO) session.getAttribute("user");
+        request.setAttribute("username", user.getUserName());
+        request.setAttribute("list", products);
+        url = "orderConfirmation.jsp";
+        
+        return url;
+    }
 
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
@@ -127,6 +149,8 @@ public class ProductController extends HttpServlet {
                 url = processSearch(request, response);
             } else if (action.equals("detail")) {
                 url = processDetail(request, response);
+            } else if(action.equals("buy")){
+                url = processBuyProduct(request, response);
             } else {
                 url = processPrintAll(request, response);
             }

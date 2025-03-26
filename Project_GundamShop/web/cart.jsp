@@ -14,7 +14,7 @@
             <c:when test="${empty CART_ITEMS}">
                 <p class="center">Giỏ hàng trống!</p>
             </c:when>
-            <c:otherwise>
+            <c:otherwise>              
                 <table>
                     <tr>
                         <th>Hình ảnh</th>
@@ -53,8 +53,17 @@
                 </table>
                 <div class="cart-actions">
                     <a href="CartController?action=clear" class="btn-clear">Xoá toàn bộ giỏ</a>
-                    <a href="CheckoutController?action=checkout" class="btn-checkout">Đặt hàng</a>
+                    <form action="ProductController" method="post">
+                        <input type="hidden" name="action" value="buy"/>
+                        <c:forEach var="item" items="${CART_ITEMS}">
+                            <input type="hidden" name="product_id" value="${item.productId}"/>
+                            <input type="hidden" name="quantity_${item.productId}" value="${item.quantity}"/>
+                        </c:forEach>
+                        <button type="submit" class="btn-checkout">Thanh toán</button>
+                    </form>
                 </div>
+
+
             </c:otherwise>
         </c:choose>
         <p class="center"><a href="ProductController?action=showAll" class="btn-continue">Tiếp tục mua hàng</a></p>
