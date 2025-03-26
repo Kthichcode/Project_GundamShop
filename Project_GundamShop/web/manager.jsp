@@ -7,7 +7,7 @@
 <%@page import="utils.AuthUtils"%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
-<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
+<%@taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
 <!DOCTYPE html>
 <html>
     <head>
@@ -31,6 +31,7 @@
 
             <div class="filter-container">
                 <form action="AdminController" method="GET">
+                    
                     <label for="category">Chọn danh mục:</label>
                     <select name="categoryId" id="category">
                         <option value="">Tất cả</option>

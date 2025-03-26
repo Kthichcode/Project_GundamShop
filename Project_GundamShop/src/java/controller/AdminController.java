@@ -101,16 +101,29 @@ public class AdminController extends HttpServlet {
                 int stock_quantity = Integer.parseInt(request.getParameter("stock_quantity"));
                 int category_id = Integer.parseInt(request.getParameter("category_id"));
                 String image_url = request.getParameter("image_url");
-                
+
                 boolean checkError = false;
-                
-                
-                
-                ProductsDTO product = new ProductsDTO(name, description, price, category_id, stock_quantity, image_url);
-                pd.create(product);
-                url = "productForm.jsp";
-                request.setAttribute("product", product);
-                request.setAttribute("mess", "Create successful");
+
+                if (price < 0) {
+                    request.setAttribute("price_Error", "Price must be > 0");
+                    checkError = true;
+                }
+
+                if (stock_quantity < 0) {
+                    request.setAttribute("quantity_Error", "Quantity must be > 0");
+                    checkError = true;
+                }
+
+                if (checkError == false) {
+                    ProductsDTO product = new ProductsDTO(name, description, price, category_id, stock_quantity, image_url);
+                    pd.create(product);
+                    url = "productForm.jsp";
+                    request.setAttribute("product", product);
+                    request.setAttribute("mess", "Create successful");
+                } else {
+                    url = "productForm.jsp";
+                }
+
             } catch (Exception e) {
             }
 
@@ -147,14 +160,29 @@ public class AdminController extends HttpServlet {
                 int category_id = Integer.parseInt(request.getParameter("category_id"));
                 String image_url = request.getParameter("image_url");
                 boolean status = Boolean.parseBoolean(request.getParameter("status"));
+                boolean checkError = false;
 
-                ProductsDTO product = new ProductsDTO(product_id, name, description, price, category_id, stock_quantity, image_url, status);
-                pd.update(product);
-                request.setAttribute("action", "update");
-                request.setAttribute("product", product);
-                request.setAttribute("mess", "Update successful");
-                
-                url = "productForm.jsp";
+                if (price < 0) {
+                    request.setAttribute("price_Error", "Price must be > 0");
+                    checkError = true;
+                }
+
+                if (stock_quantity < 0) {
+                    request.setAttribute("quantity_Error", "Quantity must be > 0");
+                    checkError = true;
+                }
+
+                if (checkError == false) {
+                    ProductsDTO product = new ProductsDTO(product_id, name, description, price, category_id, stock_quantity, image_url, status);
+                    pd.update(product);
+                    request.setAttribute("action", "update");
+                    request.setAttribute("product", product);
+                    request.setAttribute("mess", "Update successful");
+                    url = "productForm.jsp";
+                }else{
+                    url = "productForm.jsp";
+                }
+               
             } catch (Exception e) {
             }
 
@@ -180,7 +208,7 @@ public class AdminController extends HttpServlet {
                     url = processEdit(request, response);
                 } else if (action.equals("update")) {
                     url = processUpdate(request, response);
-                }else if (action.equals("delete")) {
+                } else if (action.equals("delete")) {
                     url = processDelete(request, response);
                 }
             }

@@ -29,7 +29,7 @@
                         <c:set var="subTotal" value="${item.price * item.quantity}" />
                         <c:set var="total" value="${total + subTotal}" scope="page" />
                         <tr>
-                            <td><img src="img/${item.img}" alt="${item.productName}" class="cart-img"></td>
+                            <td><img src="${item.img}" alt="${item.productName}" class="cart-img"></td>
                             <td>${item.productName}</td>
                             <td><fmt:formatNumber value="${item.price}" pattern="#,##0.00" /></td>
                             <td>

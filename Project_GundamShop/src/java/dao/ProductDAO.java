@@ -196,8 +196,8 @@ public class ProductDAO implements IDAO<ProductsDTO, Integer> {
     
     public List<ProductsDTO> readByCategoryForAD(int catID) {
         List<ProductsDTO> list = new ArrayList<>();
-        String sql = "SELECT product_id, name, description, price, stock_quantity, image_url "
-                + "FROM Products WHERE category_id = ?";
+        String sql = "SELECT * FROM Products WHERE category_id = ?";
+               
         try (Connection conn = DBUtils.getConnection();
                 PreparedStatement ps = conn.prepareStatement(sql)) {
             ps.setInt(1, catID);
@@ -208,8 +208,10 @@ public class ProductDAO implements IDAO<ProductsDTO, Integer> {
                     p.setName(rs.getString("name"));
                     p.setDescription(rs.getString("description"));
                     p.setPrice(rs.getDouble("price"));
-                    p.setStock_quantity(rs.getInt("stock_quantity"));
+                    p.setCategory_id(rs.getInt("category_id"));
+                    p.setStock_quantity(rs.getInt("stock_quantity"));              
                     p.setImage_url(rs.getString("image_url"));
+                    p.setStatus(rs.getBoolean("status"));
                     list.add(p);
                 }
             }
@@ -303,7 +305,7 @@ public class ProductDAO implements IDAO<ProductsDTO, Integer> {
         int offset = (page - 1) * pageSize;
         // Câu lệnh SQL: lọc theo category, sắp xếp theo product_id,
         // và sử dụng OFFSET – FETCH để phân trang
-        String sql = "SELECT * FROM Products WHERE category_id = ? ORDER BY product_id OFFSET ? ROWS FETCH NEXT ? ROWS ONLY";
+        String sql = "SELECT * FROM Products WHERE category_id = ? AND stock_quantity > 0 AND status = 1 ORDER BY product_id OFFSET ? ROWS FETCH NEXT ? ROWS ONLY";
 
         try (Connection conn = DBUtils.getConnection();
                 PreparedStatement ps = conn.prepareStatement(sql)) {

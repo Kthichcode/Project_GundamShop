@@ -56,11 +56,17 @@
                     <div class="form-field">
                         <label for="price">Price</label>
                         <input type="text" id="price" name="price" value="${product.price}">
+                        <c:if test="${not empty requestScope.price_Error}">
+                            <div class="error-message">${requestScope.price_Error}</div>
+                        </c:if>
                     </div>
 
                     <div class="form-field">
                         <label for="quantity">Quantity</label>
                         <input type="number" id="quantity" name="stock_quantity" value="${product.stock_quantity}" required>
+                        <c:if test="${not empty requestScope.quantity_Error}">
+                            <div class="error-message">${requestScope.quantity_Error}</div>
+                        </c:if>
                     </div>
 
                     <div class="form-field">
