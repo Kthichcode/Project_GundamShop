@@ -180,6 +180,8 @@ public class AdminController extends HttpServlet {
                     request.setAttribute("mess", "Update successful");
                     url = "productForm.jsp";
                 }else{
+                    request.setAttribute("action", "update");
+                    //request.setAttribute("product", product);
                     url = "productForm.jsp";
                 }
                
