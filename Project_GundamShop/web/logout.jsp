@@ -13,7 +13,7 @@
         <title>JSP Page</title>
     </head>
     <body>
-          <%@include file="header.jsp" %>
+          <%@include file="header.jsp"%>
         <div style="min-height: 500px; padding: 10px">
         <h4>You are logged out!</h1>
         <a href="MainController">Back to login</a>

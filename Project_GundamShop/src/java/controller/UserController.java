@@ -17,6 +17,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import utils.AuthUtils;
+import utils.PasswordUtils;
 
 /**
  *
@@ -37,8 +38,8 @@ public class UserController extends HttpServlet {
         String userName = request.getParameter("username");
         String pass = request.getParameter("password");
         String email = request.getParameter("email");
-
-        UserDTO user = new UserDTO(userName, pass, email);
+        String passHash = PasswordUtils.hashPassword(pass);
+        UserDTO user = new UserDTO(userName, passHash, email);
         ud.create(user);
         url = LOGIN_PAGE;
         request.setAttribute("mess", "Sign Up successfully");
@@ -55,7 +56,7 @@ public class UserController extends HttpServlet {
             UserDTO user = AuthUtils.getUser(userName);
             HttpSession session = request.getSession();
             session.setAttribute("user", user);
-            session.setAttribute("mess", "Hello" + " " + userName + "!");
+            session.setAttribute("mess",userName);
             url = "ProductController?action=showAll";
         } else {
             request.setAttribute("mess", "Invalid username or password");

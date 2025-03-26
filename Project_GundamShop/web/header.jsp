@@ -19,7 +19,7 @@
 
     <div class="header-container">
         <nav class="nav">
-            <a href="ProductController" class="logo">Minh.Đạt Gunpla Shop</a>
+            <a href="ProductController" class="logo">MD Gunpla Shop</a>
 
             <ul class="menu">
                 <li class="menu-item"><a href="ProductController">🏠 Trang chủ</a></li>
