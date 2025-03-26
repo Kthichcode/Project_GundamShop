@@ -171,20 +171,20 @@ public class AdminController extends HttpServlet {
                     request.setAttribute("quantity_Error", "Quantity must be > 0");
                     checkError = true;
                 }
+                ProductsDTO product = new ProductsDTO(product_id, name, description, price, category_id, stock_quantity, image_url, status);
 
                 if (checkError == false) {
-                    ProductsDTO product = new ProductsDTO(product_id, name, description, price, category_id, stock_quantity, image_url, status);
                     pd.update(product);
                     request.setAttribute("action", "update");
                     request.setAttribute("product", product);
                     request.setAttribute("mess", "Update successful");
                     url = "productForm.jsp";
-                }else{
+                } else {
                     request.setAttribute("action", "update");
-                    //request.setAttribute("product", product);
+                    request.setAttribute("product", product);
                     url = "productForm.jsp";
                 }
-               
+
             } catch (Exception e) {
             }
 
