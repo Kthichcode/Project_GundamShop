@@ -53,11 +53,11 @@
                 </table>
                 <div class="cart-actions">
                     <a href="CartController?action=clear" class="btn-clear">Xoá toàn bộ giỏ</a>
-                    <form action="ProductController" method="post">
+                    <form action="CartController" method="post">
                         <input type="hidden" name="action" value="buy"/>
                         <c:forEach var="item" items="${CART_ITEMS}">
-                            <input type="hidden" name="product_id" value="${item.productId}"/>
-                            <input type="hidden" name="quantity_${item.productId}" value="${item.quantity}"/>
+                            <input type="hidden" name="productId" value="${item.productId}"/>
+                            <input type="hidden" name="quantity" value="${item.quantity}"/>
                         </c:forEach>
                         <button type="submit" class="btn-checkout">Thanh toán</button>
                     </form>

@@ -67,7 +67,7 @@
 
                 <!-- Form thêm sản phẩm vào giỏ -->
                 <form action="CartController" method="get" class="add-cart-form">
-                    <input type="hidden" name="action" value="add"/>
+                    
                     <input type="hidden" name="productId" value="${p.product_id}"/>
                     <div class="quantity-box">
                         <label for="quantity">Số lượng:</label>
@@ -80,8 +80,8 @@
                     <div class="action-buttons">
                         <c:choose>
                             <c:when test="${userLoggedIn}">
-                                <button type="submit" class="btn btn-cart">🛒 Thêm vào giỏ</button>
-                                <a href="ProductController?action=buy&product_id=${p.product_id}" class="btn btn-buy">Mua ngay</a>
+                                <button type="submit" name="action" value="add" class="btn btn-cart">🛒 Thêm vào giỏ</button>
+                                <button type="submit" name="action" value="buy" class="btn btn-buy">Mua ngay</button>
                             </c:when>
                             <c:otherwise>
                                 <a href="login.jsp" class="btn btn-cart">🛒 Thêm vào giỏ</a>
@@ -114,9 +114,9 @@
                     <th>Nhà sản xuất </th>
                     <td> BANDAI</td>
                 </tr>
-                
-                
-                 <tr>
+
+
+                <tr>
                     <th>Xuất sứ </th>
                     <td>Japan </td>
                 </tr>

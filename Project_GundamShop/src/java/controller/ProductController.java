@@ -113,26 +113,31 @@ public class ProductController extends HttpServlet {
 
     }
     
-    public String processBuyProduct(HttpServletRequest request, HttpServletResponse response)
-            throws ServletException, IOException {
-        HttpSession session = request.getSession();
-        String url = LOGIN_PAGE;       
-        String[] productIds = request.getParameterValues("product_id");
-        //int quantity = Integer.parseInt(request.getParameter("quantity"));
-        List<ProductsDTO> products = new ArrayList<>();
-        for (String productId : productIds) {
-            int id = Integer.parseInt(productId);
-            ProductsDTO p = pd.readById(id);
-            products.add(p);
-        }
-        UserDTO user = (UserDTO) session.getAttribute("user");
-        request.setAttribute("username", user.getUserName());
-        request.setAttribute("list", products);
-        //request.setAttribute("quantity", quantity);
-        url = "orderConfirmation.jsp";
-        
-        return url;
-    }
+//    public String processBuyProduct(HttpServletRequest request, HttpServletResponse response)
+//            throws ServletException, IOException {
+//        HttpSession session = request.getSession();
+//        String url = LOGIN_PAGE;       
+//        String[] productIds = request.getParameterValues("product_id");
+//        String[] quantities = request.getParameterValues("quantity");
+//        //int quantity = Integer.parseInt(request.getParameter("quantity"));
+//        List<ProductsDTO> products = new ArrayList<>();
+//        List<Integer> productQuantities = new ArrayList<>();
+//        for (int i = 0; i < productIds.length; i++) {
+//            int id = Integer.parseInt(productIds[i]);
+//            int quantity = Integer.parseInt(quantities[i]);
+//            
+//            ProductsDTO p = pd.readById(id);
+//            products.add(p);
+//            productQuantities.add(quantity);
+//        }
+//        UserDTO user = (UserDTO) session.getAttribute("user");
+//        request.setAttribute("username", user.getUserName());
+//        request.setAttribute("list", products);
+//        request.setAttribute("quantities", productQuantities);
+//        url = "orderConfirmation.jsp";
+//        
+//        return url;
+//    }
 
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
@@ -149,9 +154,7 @@ public class ProductController extends HttpServlet {
                 url = processSearch(request, response);
             } else if (action.equals("detail")) {
                 url = processDetail(request, response);
-            } else if(action.equals("buy")){
-                url = processBuyProduct(request, response);
-            } else {
+            }else {
                 url = processPrintAll(request, response);
             }
         } catch (Exception e) {

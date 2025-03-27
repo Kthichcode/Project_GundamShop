@@ -4,6 +4,7 @@ import dao.CartDAO;
 import dao.ProductDAO;
 import dto.CartDTO;
 import dto.ProductsDTO;
+import dto.UserDTO;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
@@ -13,7 +14,7 @@ import javax.servlet.http.*;
 
 @WebServlet(name = "CartController", urlPatterns = {"/CartController"})
 public class CartController extends HttpServlet {
-
+    private static final String LOGIN_PAGE = "login.jsp";
     private CartDAO cartDAO = new CartDAO();
     private ProductDAO productDAO = new ProductDAO();
 
@@ -26,7 +27,6 @@ public class CartController extends HttpServlet {
         if (action == null) {
             action = "view";
         }
-        
 
         if (userId == null) {
             @SuppressWarnings("unchecked")
@@ -77,6 +77,27 @@ public class CartController extends HttpServlet {
             } else if ("clear".equals(action)) {
                 session.removeAttribute("SESSION_CART");
                 response.sendRedirect("CartController?action=view");
+            } else if ("buy".equals(action)) {
+                
+                String url = LOGIN_PAGE;
+                String[] productIds = request.getParameterValues("productId");
+                String[] quantities = request.getParameterValues("quantity");
+                //int quantity = Integer.parseInt(request.getParameter("quantity"));
+                List<ProductsDTO> products = new ArrayList<>();
+                List<Integer> productQuantities = new ArrayList<>();
+                for (int i = 0; i < productIds.length; i++) {
+                    int id = Integer.parseInt(productIds[i]);
+                    int quantity = Integer.parseInt(quantities[i]);
+
+                    ProductsDTO p = productDAO.readById(id);
+                    products.add(p);
+                    productQuantities.add(quantity);
+                }
+                UserDTO user = (UserDTO) session.getAttribute("user");
+                request.setAttribute("username", user.getUserName());
+                request.setAttribute("list", products);
+                request.setAttribute("quantities", productQuantities);
+                request.getRequestDispatcher("orderConfirmation.jsp").forward(request, response);
             } else {
                 response.sendRedirect("CartController?action=view");
             }

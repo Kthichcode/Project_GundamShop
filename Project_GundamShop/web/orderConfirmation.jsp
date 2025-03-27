@@ -74,13 +74,13 @@
             <p>Cảm ơn bạn đã mua sắm tại Minh.Đạt Gunpla Shop.</p>
             <p>Thông tin đơn hàng</p>
 
-
-            <c:set var="totalPrice" value="0" scope="page"/>
-
+            <c:set var="index" value="0"/>
             <c:forEach var="p" items="${list}">
                 Tên sản phẩm: <c:out value="${p.name}"/> <br/>
                 Giá: <fmt:formatNumber value="${p.price}" type="number" pattern="#,##0.00"/> <br/>
-                <c:set var="totalPrice" value="${totalPrice + p.price}" scope="page"/>
+                Số lượng: <c:out value="${quantities[index]}"/> <br/>
+                <c:set var="totalPrice" value="${totalPrice + (p.price * quantities[index])}" scope="page"/>
+                <c:set var="index" value="${index + 1}"/>
             </c:forEach>
 
             <p><strong>Tổng giá tiền: <fmt:formatNumber value="${totalPrice}" type="number" pattern="#,##0.00"/></strong></p>
