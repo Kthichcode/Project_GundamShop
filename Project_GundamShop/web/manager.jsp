@@ -13,6 +13,7 @@
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
         <title>JSP Page</title>
+        <meta charset="UTF-8">
         <link rel="stylesheet" type="text/css" href="assets/css/manager.css">
     </head>
     <body>
@@ -27,11 +28,14 @@
                 <button class="search-button">🔍</button>
             </form>
 
-            <a href="productForm.jsp">Create New Product</a>
+            <a href="productForm.jsp">Create New Product</a> </br>  
+            <a href="ProductController?action=search">Back to home</a> 
+            </hr>
+
 
             <div class="filter-container">
                 <form action="AdminController" method="GET">
-                    
+
                     <label for="category">Chọn danh mục:</label>
                     <select name="categoryId" id="category">
                         <option value="">Tất cả</option>
@@ -95,3 +99,23 @@
         </c:if>
     </body>
 </html>
+
+
+<style>
+
+    a[href="ProductController?action=search"] {
+        display: inline-block;
+        padding: 10px 20px;
+        background-color: #28a745; /* Màu xanh giống nút "Create New Product" */
+        color: white;
+        text-decoration: none;
+        border-radius: 5px; /* Bo góc */
+        font-weight: bold;
+        text-align: center;
+        transition: background-color 0.3s;
+    }
+
+    a[href="ProductController?action=search"]:hover {
+        background-color: #218838; /* Màu xanh đậm hơn khi hover */
+    }
+</style>

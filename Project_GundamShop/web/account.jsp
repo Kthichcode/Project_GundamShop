@@ -21,7 +21,7 @@
             <p><strong>Tên đăng nhập:</strong> ${sessionScope.user.userName}</p>
             <p><strong>Email:</strong> ${sessionScope.user.email}</p>
             <!-- Nút Quay lại trang chủ -->
-            <a href="home.jsp" class="btn-home">Quay lại trang chủ</a>
+            <a href="ProductController?search" class="btn-home">Quay lại trang chủ</a>
         </c:if>
 
         <c:if test="${sessionScope.user == null}">
