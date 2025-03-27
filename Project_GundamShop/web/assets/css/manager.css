@@ -203,3 +203,19 @@ td a[href*="delete"]:hover {
         max-width: 80px;
     }
 }
+
+a[href="ProductController?action=search"] {
+    display: inline-block;
+    padding: 10px 20px;
+    background-color: #28a745; /* Màu xanh giống nút "Create New Product" */
+    color: white;
+    text-decoration: none;
+    border-radius: 5px; /* Bo góc */
+    font-weight: bold;
+    text-align: center;
+    transition: background-color 0.3s;
+}
+
+a[href="ProductController?action=search"]:hover {
+    background-color: #218838; /* Màu xanh đậm hơn khi hover */
+}
