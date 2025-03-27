@@ -6,7 +6,7 @@
 
 <%@page import="utils.AuthUtils"%>
 <%@page import="dto.ProductsDTO"%>
-<%@page contentType="text/html" pageEncoding="UTF-8"%>
+<%@ page contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" %>
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <!DOCTYPE html>
 <html>
@@ -33,7 +33,7 @@
 
         <c:if test="${isAdmin}">
             <div class="form-container">
-                <form action="AdminController" method="post" id="productForm" enctype="multipart/form-data">
+                <form action="AdminController" method="post" id="productForm" enctype="multipart/form-data" accept-charset="UTF-8">
                     <input type="hidden" name="action" value="<%=action%>"/>
                     
                     <c:if test="${action == 'update'}">

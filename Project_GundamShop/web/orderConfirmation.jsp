@@ -15,46 +15,54 @@
         <link rel="stylesheet" href="assets/css/orderConfirmation.css">
         <style>
             body {
-                font-family: 'Roboto', sans-serif;
-                background-color: #f8f9fa;
+                font-family: Arial, sans-serif;
+                background-color: #f4f4f4;
                 margin: 0;
-                padding: 20px;
+                padding: 0;
             }
 
             .confirmation-container {
                 max-width: 600px;
                 margin: 50px auto;
+                padding: 20px;
                 background-color: #fff;
-                padding: 30px;
                 border-radius: 8px;
-                box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+                box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
                 text-align: center;
             }
 
             .confirmation-container h2 {
                 color: #28a745;
-                margin-bottom: 20px;
+                font-size: 28px;
+                margin-bottom: 10px;
             }
 
             .confirmation-container p {
+                font-size: 16px;
+                color: #333;
+                margin: 10px 0;
+            }
+
+            .confirmation-container strong {
+                color: #d9534f;
                 font-size: 18px;
-                margin-bottom: 30px;
             }
 
             .btn-home {
                 display: inline-block;
-                padding: 12px 24px;
+                margin-top: 20px;
+                padding: 10px 20px;
                 background-color: #007bff;
                 color: #fff;
                 text-decoration: none;
-                border-radius: 4px;
+                border-radius: 5px;
+                font-size: 16px;
                 transition: background-color 0.3s ease;
             }
 
             .btn-home:hover {
                 background-color: #0056b3;
             }
-
         </style>
     </head>
     <body>

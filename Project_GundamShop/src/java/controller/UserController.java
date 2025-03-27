@@ -38,6 +38,21 @@ public class UserController extends HttpServlet {
         String userName = request.getParameter("username");
         String pass = request.getParameter("password");
         String email = request.getParameter("email");
+        
+        UserDAO ud = new UserDAO();
+
+        UserDTO existingUser = ud.readById(userName);
+        if (existingUser != null) {
+            request.setAttribute("mess1", "Tên đăng nhập '" + userName + "' already exists");
+            return url;
+        }
+
+        UserDTO existingEmail = ud.readByEmail(email);
+        if (existingEmail != null) {
+            request.setAttribute("mess2", "Email '" + email + "' already exists");
+            return url;
+        }
+        
         String passHash = PasswordUtils.hashPassword(pass);
         UserDTO user = new UserDTO(userName, passHash, email);
         ud.create(user);
@@ -56,7 +71,7 @@ public class UserController extends HttpServlet {
             UserDTO user = AuthUtils.getUser(userName);
             HttpSession session = request.getSession();
             session.setAttribute("user", user);
-            session.setAttribute("mess",userName);
+            session.setAttribute("mess", userName);
             url = "ProductController?action=showAll";
         } else {
             request.setAttribute("mess", "Invalid username or password");

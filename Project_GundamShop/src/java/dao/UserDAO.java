@@ -79,6 +79,28 @@ public class UserDAO implements IDAO<UserDTO, String> {
         }
         return null;
     }
+    
+    public UserDTO readByEmail(String email) {
+        String sql = "SELECT * FROM Users WHERE email = ?";
+        try (Connection conn = DBUtils.getConnection();
+                PreparedStatement ps = conn.prepareStatement(sql)) {
+            ps.setString(1, email);
+            try (ResultSet rs = ps.executeQuery()) {
+                if (rs.next()) {
+                    UserDTO user = new UserDTO();
+                    user.setUserID(rs.getString("user_id"));
+                    user.setUserName(rs.getString("username"));
+                    user.setPassword(rs.getString("password_hash"));
+                    user.setEmail(rs.getString("email"));
+                    user.setRoleID(rs.getString("role"));
+                    return user;
+                }
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return null;
+    }
 
     @Override
     public boolean update(UserDTO entity) {

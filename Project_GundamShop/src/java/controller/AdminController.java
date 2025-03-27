@@ -9,7 +9,6 @@ import dao.CategoryDAO;
 import dao.ProductDAO;
 import dto.CategoryDTO;
 import dto.ProductsDTO;
-import java.awt.print.Book;
 import java.io.IOException;
 import java.util.List;
 import javax.servlet.ServletException;
@@ -150,6 +149,9 @@ public class AdminController extends HttpServlet {
             throws ServletException, IOException {
         String url = MANAGE_PAGE;
         HttpSession session = request.getSession();
+        request.setCharacterEncoding("UTF-8");
+        response.setContentType("text/html; charset=UTF-8");
+        response.setCharacterEncoding("UTF-8");
         if (AuthUtils.isAdmin(session)) {
             try {
                 int product_id = Integer.parseInt(request.getParameter("product_id"));
@@ -204,7 +206,9 @@ public class AdminController extends HttpServlet {
         response.setContentType("text/html;charset=UTF-8");
         String action = request.getParameter("action");
         String url = MANAGE_PAGE;
-
+        request.setCharacterEncoding("UTF-8");
+        response.setContentType("text/html; charset=UTF-8");
+        response.setCharacterEncoding("UTF-8");
         try {
             if (action == null || action.trim().isEmpty()) {
                 url = processPrintAll(request, response);
@@ -256,6 +260,9 @@ public class AdminController extends HttpServlet {
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         processRequest(request, response);
+        request.setCharacterEncoding("UTF-8");
+        response.setCharacterEncoding("UTF-8");
+        response.setContentType("text/html;charset=UTF-8");
     }
 
     /**

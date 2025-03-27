@@ -77,11 +77,7 @@ public class ProductController extends HttpServlet {
     public String processSearch(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         HttpSession session = request.getSession();
-
-        if (!AuthUtils.isLoggedIn(session)) {
-            return LOGIN_PAGE;
-        }
-
+       
         String searchTerm = request.getParameter("searchTerm");
         if (searchTerm == null) {
             searchTerm = "";
@@ -120,10 +116,9 @@ public class ProductController extends HttpServlet {
     public String processBuyProduct(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         HttpSession session = request.getSession();
-        String url = LOGIN_PAGE;
-        //int product_id = Integer.parseInt(request.getParameter("product_id"));
+        String url = LOGIN_PAGE;       
         String[] productIds = request.getParameterValues("product_id");
-        
+        //int quantity = Integer.parseInt(request.getParameter("quantity"));
         List<ProductsDTO> products = new ArrayList<>();
         for (String productId : productIds) {
             int id = Integer.parseInt(productId);
@@ -133,6 +128,7 @@ public class ProductController extends HttpServlet {
         UserDTO user = (UserDTO) session.getAttribute("user");
         request.setAttribute("username", user.getUserName());
         request.setAttribute("list", products);
+        //request.setAttribute("quantity", quantity);
         url = "orderConfirmation.jsp";
         
         return url;
@@ -141,7 +137,8 @@ public class ProductController extends HttpServlet {
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
-
+        request.setCharacterEncoding("UTF-8");
+        response.setCharacterEncoding("UTF-8");
         String action = request.getParameter("action");
         String url = HOME_PAGE;
 

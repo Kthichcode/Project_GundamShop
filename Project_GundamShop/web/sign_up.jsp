@@ -5,6 +5,7 @@
 --%>
 
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
+<%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <!DOCTYPE html>
 <html>
     <head>
@@ -14,10 +15,17 @@
     <body>
         <div class="signup-container">
             <h2>ĐĂNG KÝ</h2>
+
             <form id="signup_form" action="UserController">
                 <input type="hidden" name="action" value="signup"/>
                 <input type="text" name="username" placeholder="Tên đăng ký" autocomplete="off" required>
+                <c:if test="${not empty mess1}">
+                    <p style="color: red;"><c:out value="${mess1}"/></p>
+                </c:if>
                 <input type="email" name="email" placeholder="Email" autocomplete="off" required>
+                <c:if test="${not empty mess2}">
+                    <p style="color: red;"><c:out value="${mess2}"/></p>
+                </c:if>
                 <input type="password" name="password" placeholder="Mật khẩu" autocomplete="new-password" required>
                 <button type="submit">Đăng ký</button>
                 <hr>

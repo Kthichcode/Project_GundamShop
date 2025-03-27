@@ -9,7 +9,7 @@
     </head>   
     <body>
         <div class="login-container">
-            <h3 style="color: red"><c:out value="${requestScope.mess}"></c:out></h3>
+            <h3 style="color: white"><c:out value="${requestScope.mess}"></c:out></h3>
             <h2>ĐĂNG NHẬP</h2>
             <form id="login_form" action="UserController" method="POST">
                 <input type="hidden" name="action" value="login">
